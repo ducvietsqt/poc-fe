@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
 import { APP_NAME, APP_VERSION } from '@/env'
 
-import wallet from "./store/wallet";
+import wallet from "./store/wallet/index.wallet.store";
 
 Vue.use(Vuex);
 
