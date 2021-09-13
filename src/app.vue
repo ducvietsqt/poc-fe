@@ -18,7 +18,7 @@
                 part
                 hover:bg-white hover:bg-opacity-50
               "
-              @click="betting[NUMBERS.ZERO]++"
+              @click="handleBet(NUMBERS.ZERO)"
             >
               <div
                 v-if="betting[NUMBERS.ZERO]"
@@ -33,7 +33,7 @@
               v-for="item in RENDER_NUMBERS"
               :key="item"
               :class="compileRenderNumberClass(item)"
-              @click="betting[item]++"
+              @click="handleBet(item)"
             >
               <div
                 v-if="betting[item]"
@@ -47,7 +47,7 @@
               class="number bet2to1-1 part hover:bg-white hover:bg-opacity-50"
               @mouseover="one2to1Hover = true"
               @mouseout="one2to1Hover = false"
-              @click="betting.lineOne++"
+              @click="handleBet('lineOne')"
             >
               <div
                 v-if="betting.lineOne"
@@ -61,7 +61,7 @@
               class="number bet2to1-2 part hover:bg-white hover:bg-opacity-50"
               @mouseover="two2to1Hover = true"
               @mouseout="two2to1Hover = false"
-              @click="betting.lineTwo++"
+              @click="handleBet('lineTwo')"
             >
               <div
                 v-if="betting.lineTwo"
@@ -75,7 +75,7 @@
               class="number bet2to1-3 part hover:bg-white hover:bg-opacity-50"
               @mouseover="three2to1Hover = true"
               @mouseout="three2to1Hover = false"
-              @click="betting.lineThree++"
+              @click="handleBet('lineThree')"
             >
               <div
                 v-if="betting.lineThree"
@@ -96,7 +96,7 @@
               "
               @mouseover="column1st12Hover = true"
               @mouseout="column1st12Hover = false"
-              @click="betting.oneToTwelve++"
+              @click="handleBet('oneToTwelve')"
             >
               <div
                 v-if="betting.oneToTwelve"
@@ -115,7 +115,7 @@
               "
               @mouseover="column2nd12Hover = true"
               @mouseout="column2nd12Hover = false"
-              @click="betting.thirteenToTwentyfour++"
+              @click="handleBet('thirteenToTwentyfour')"
             >
               <div
                 v-if="betting.thirteenToTwentyfour"
@@ -134,7 +134,7 @@
               "
               @mouseover="column3rd12Hover = true"
               @mouseout="column3rd12Hover = false"
-              @click="betting.twentyfiveToThirtysix++"
+              @click="handleBet('twentyfiveToThirtysix')"
             >
               <div
                 v-if="betting.twentyfiveToThirtysix"
@@ -153,7 +153,7 @@
               "
               @mouseover="column1to18Hover = true"
               @mouseout="column1to18Hover = false"
-              @click="betting.oneToEighteen++"
+              @click="handleBet('oneToEighteen')"
             >
               <div
                 v-if="betting.oneToEighteen"
@@ -173,7 +173,7 @@
               "
               @mouseover="columnEvenHover = true"
               @mouseout="columnEvenHover = false"
-              @click="betting.even++"
+              @click="handleBet('even')"
             >
               <div
                 v-if="betting.even"
@@ -192,7 +192,7 @@
               "
               @mouseover="columnRedHover = true"
               @mouseout="columnRedHover = false"
-              @click="betting.red++"
+              @click="handleBet('red')"
             >
               <div
                 v-if="betting.red"
@@ -211,7 +211,7 @@
               "
               @mouseover="columnBlackHover = true"
               @mouseout="columnBlackHover = false"
-              @click="betting.black++"
+              @click="handleBet('black')"
             >
               <div
                 v-if="betting.black"
@@ -230,7 +230,7 @@
               "
               @mouseover="columnOddHover = true"
               @mouseout="columnOddHover = false"
-              @click="betting.odd++"
+              @click="handleBet('odd')"
             >
               <div
                 v-if="betting.odd"
@@ -249,7 +249,7 @@
               "
               @mouseover="column19to36Hover = true"
               @mouseout="column19to36Hover = false"
-              @click="betting.nineteenToThirtysix++"
+              @click="handleBet('nineteenToThirtysix')"
             >
               <div
                 v-if="betting.nineteenToThirtysix"
@@ -311,7 +311,7 @@
           </div>
           <div class="bet-area area">
             <div class="text"><span>BET</span> $</div>
-            <div class="bet-total">0.00</div>
+            <div class="bet-total">{{ betSum | toCurrency(2) }}</div>
           </div>
         </div>
 
@@ -329,43 +329,18 @@
         <div
           class="alert-message-container alert-money"
           :class="{
-            'alert-message-visible': alertMessageVisible,
+            'alert-message-visible': alerMoney,
           }"
-          @click="alertMessageVisible = false"
+          @click="alerMoney = false"
         >
           <div class="alert-message">NOT ENOUGH MONEY</div>
         </div>
 
-        <div
-          class="alert-message-container alert-max-bet"
-          :class="{
-            'alert-message-visible': alertMessageVisible,
-          }"
-          @click="alertMessageVisible = false"
-        >
-          <div class="alert-message">
-            YOU SHOULD NOT EXCEED MAXIMUM BET OF $1000
-          </div>
-        </div>
-
-       <MoleculeAlertSpinResult :spined="spined" :rouletteNumber="rouletteNumber" :win="win"/>
-
-        <div
-          class="alert-message-container alert-game-over"
-          :class="{
-            'alert-message-visible': alertMessageVisible,
-          }"
-          @click="alertMessageVisible = false"
-        >
-          <div class="alert-message">
-            <div class="text text1">YOU ARE OUT OF MONEY.</div>
-            <div class="text text2">WOULD YOU LIKE TO PLAY AGAIN?</div>
-            <div class="answers">
-              <div class="answer answer-no">NO</div>
-              <div class="answer answer-yes">YES</div>
-            </div>
-          </div>
-        </div>
+        <MoleculeAlertSpinResult
+          :spined="spined"
+          :rouletteNumber="rouletteNumber"
+          :win="win"
+        />
         <!-- Alert messages end ---------------------------------------------------------------->
       </div>
     </div>
@@ -387,6 +362,7 @@ import {
   RENDER_NUMBERS,
   RED_NUMBERS,
   BLACK_NUMBERS,
+  CHIP_NUMBER,
 } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
@@ -399,7 +375,7 @@ export default {
     MoleculeModalLogout,
     MoleculeRouletteWheel,
     OrganismTopBar,
-    MoleculeAlertSpinResult
+    MoleculeAlertSpinResult,
   },
   data() {
     return {
@@ -417,15 +393,18 @@ export default {
       columnRedHover: false,
       columnBlackHover: false,
       alerBets: false,
+      alerMoney: false,
       NUMBERS,
       rouletteNumbersAmount: 37,
       ballLandingNumber: 0,
       alertMessageVisible: false,
+      CHIP_NUMBER,
     };
   },
   computed: {
     ...mapState({
       account: (state) => state.wallet.provider?.address || "",
+      balance: (state) => state.wallet.balance || false,
       history: (state) => state.roulette.history || {},
       betting: (state) => state.roulette.betting || {},
       spined: (state) => state.roulette.spin || false,
@@ -439,6 +418,7 @@ export default {
   methods: {
     ...mapMutations({
       handleReset: "roulette/RESET_ROULETTE",
+      updateBetting: "roulette/UPDATE_BETTING",
     }),
     ...mapActions({
       spin: "roulette/spin",
@@ -486,6 +466,14 @@ export default {
     handleSpin() {
       if (this.betSum == 0) return (this.alerBets = true);
       this.spin();
+    },
+    handleBet(index) {
+      if (this.balance < this.betSum + CHIP_NUMBER)
+        return (this.alerMoney = true);
+      this.updateBetting({
+        ...this.betting,
+        [index]: this.betting[index] + 1,
+      });
     },
   },
 };

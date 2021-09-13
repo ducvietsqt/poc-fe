@@ -12,6 +12,7 @@ import Antd from 'ant-design-vue';
 Vue.config.productionTip = false;
 
 import "@/plugins/vue-filter-truncate.plugin";
+import "@/plugins/vue-filter-currency.plugin";
 
 Vue.use(Antd);
 //Vue-filter START

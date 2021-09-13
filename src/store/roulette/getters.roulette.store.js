@@ -1,3 +1,7 @@
+import {
+  CHIP_NUMBER,
+} from "@/constants/roulette.constant";
+
 function areaBetCheck(equation, bet) {
   return equation && bet;
 }
@@ -10,7 +14,7 @@ export const getBetSum = state => {
       sum += state.betting[key];
     }
   }
-  return sum;
+  return sum * CHIP_NUMBER;
 };
 
 export const win = state => {

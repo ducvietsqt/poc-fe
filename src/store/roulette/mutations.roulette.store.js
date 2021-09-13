@@ -1,4 +1,4 @@
-import { UPDATE_ROULETTE, RESET_ROULETTE } from './constants.roulette.store'
+import { UPDATE_ROULETTE, RESET_ROULETTE, UPDATE_BETTING } from './constants.roulette.store'
 import {
     BETTING,
 } from "@/constants/roulette.constant";
@@ -12,5 +12,9 @@ export default {
         state.spin = false
         state.number = 0
         state.betting = Object.assign({}, BETTING)
+    },
+    [UPDATE_BETTING](state, payload) {
+        console.log(`UPDATE_BETTING:>>`, payload)
+        state.betting = Object.assign({}, payload)
     }
 };
