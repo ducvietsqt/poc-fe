@@ -14,8 +14,7 @@ module.exports = {
         7: '#8C8C8C'
       },
       red: colors.red,
-      purple: "#7737FF",
-      violet: "#eae0ff"
+      gold: "#f7b02e",
     },
     extend: {},
   },

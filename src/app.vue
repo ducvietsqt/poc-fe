@@ -12,14 +12,34 @@
             <div class="roll roll-last"></div>
           </div>
           <div class="game-name">ROULETTE</div>
-          <div class="min-max-bet">
+          <div>
+            <button
+              v-if="!account"
+              class="roulette-rolls-container h-12 px-7 font-normal"
+              style="font-size: 2rem"
+              @click="handleConnectButtonClick"
+            >
+              <span class="font-light"> Connect </span>
+            </button>
+            <button
+              v-else
+              class="roulette-rolls-container h-12 px-7 font-normal"
+              style="font-size: 2rem"
+              @click="$modal.show('modal-logout')"
+            >
+              <span class="font-light">
+                {{ account | truncate(8, 4, 4) }}
+              </span>
+            </button>
+          </div>
+          <!-- <div class="min-max-bet">
             <div class="min-bet bet-size">
               <span class="text-color">MIN:</span> $5.00
             </div>
             <div class="max-bet bet-size">
               <span class="text-color">MAX:</span> $1000.00
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="roulette-wheel-container">
           <div class="roulette-wheel">
@@ -44,7 +64,7 @@
                 part
                 hover:bg-white hover:bg-opacity-50
               "
-               @click="bettingChips.zero++"
+              @click="bettingChips.zero++"
             >
               <div
                 v-if="bettingChips.zero"
@@ -1213,6 +1233,7 @@
             <div
               class="
                 betting-chip betting-chip-menu betting-chip-menu5 betting-chip5
+                active-chip
               "
               id="chip5"
             >
@@ -1246,8 +1267,16 @@
             </div>
           </div>
         </div>
+        <div class="pt-5 pb-32">
+          <h1 class="text-white">HISTORY</h1>
+          <a-table class="text-white" :columns="columns" :data-source="data">
+            <span slot="content" slot-scope="text" class="text-white">{{
+              text
+            }}</span>
+          </a-table>
+        </div>
 
-        <div class="money-container">
+        <div class="money-container fixed bottom-0">
           <div class="cash-area area">
             <div class="text"><span>CASH</span> $</div>
             <div class="cash-total"></div>
@@ -1298,7 +1327,7 @@
     </div>
 
     <AtomNotify />
-    <MoleculeModalLogout :address="address" />
+    <MoleculeModalLogout :address="account" />
   </div>
 </template>
 
@@ -1317,31 +1346,37 @@ const columns = [
     title: "Spin",
     dataIndex: "spin",
     key: "spin",
+    scopedSlots: { customRender: "content" },
   },
   {
     title: "Number",
     dataIndex: "number",
     key: "number",
+    scopedSlots: { customRender: "content" },
   },
   {
     title: "Bet Unit",
     dataIndex: "betUnit",
     key: "betUnit",
+    scopedSlots: { customRender: "content" },
   },
   {
     title: "Win",
     key: "win",
     dataIndex: "win",
+    scopedSlots: { customRender: "content" },
   },
   {
     title: "Lost",
     key: "lost",
     dataIndex: "lost",
+    scopedSlots: { customRender: "content" },
   },
   {
     title: "Bet Layout",
     key: "betLayout",
     dataIndex: "betLayout",
+    scopedSlots: { customRender: "content" },
   },
 ];
 
@@ -1456,18 +1491,26 @@ export default {
   },
   computed: {
     ...mapState({
-      address: (state) => state.wallet.provider?.address || "",
+      account: (state) => state.wallet.provider?.address || "",
     }),
   },
   methods: {
     handleReset() {
       this.bettingChips = Object.assign({}, BETTING_CHIPS_DEFAULT);
     },
+    handleConnectButtonClick() {
+      this.$root.$emit("btn-wallet-connect");
+    },
   },
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #app {
+  .ant-table-thead > tr > th {
+    background: #00ad00;
+    color: #fff;
+    font-weight: 700;
+  }
 }
 </style>

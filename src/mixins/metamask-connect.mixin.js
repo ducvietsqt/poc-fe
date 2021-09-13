@@ -116,6 +116,7 @@ export default {
       this.handleConnect();
     }
     this.$root.$on("btn-wallet-connect", () => {
+      console.log(`btn-wallet-connect:>>`)
       this.handleConnect();
     });
   },

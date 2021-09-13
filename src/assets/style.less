@@ -1,2 +1,8 @@
 @import "./less/_tailwind.less";
+@import '~ant-design-vue/dist/antd.less';
 @import "./less/_base.less";
+@import "./less/_theme.less";
+
+.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td, .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+    background: @primary-color
+}
