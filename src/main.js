@@ -6,10 +6,16 @@ import VModal from 'vue-js-modal'
 import VueClipboard from "vue-clipboard2";
 import Notifications from 'vue-notification'
 
-Vue.config.productionTip = false;
-
 import "@/assets/style.less";
 
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+
+Vue.config.productionTip = false;
+
+
+
+Vue.use(Antd);
 //Vue-filter START
 Vue.use(VModal)
 Vue.use(VueClipboard);
