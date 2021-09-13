@@ -289,15 +289,6 @@
 
               <div class="button-text">RESET</div>
             </div>
-            <div class="button button-sound">
-              <div class="circle">
-                <i class="fas fa-volume-up icon icon1"></i>
-                <div class="cross-line"></div>
-              </div>
-              <div class="circle-overlay"></div>
-
-              <div class="button-text">SOUNDS</div>
-            </div>
           </div>
         </div>
         <div class="pt-5 pb-32">
@@ -315,7 +306,7 @@
 
         <div class="money-container fixed bottom-0">
           <div class="cash-area area">
-            <div class="text"><span>CASH</span> $</div>
+            <div class="text"><span>BALANCE</span> $</div>
             <div class="cash-total"></div>
           </div>
           <div class="bet-area area">

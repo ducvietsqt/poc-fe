@@ -1,12 +1,34 @@
 <template>
   <div class="top-bar">
-    <div class="roulette-rolls-container">
+    <!-- <div class="roulette-rolls-container">
       <div class="roll roll5"></div>
       <div class="roll roll4"></div>
       <div class="roll roll3"></div>
       <div class="roll roll2"></div>
       <div class="roll roll1"></div>
       <div class="roll roll-last"></div>
+    </div> -->
+    <div class="grid grid-cols-4 gap-4">
+      <button
+        class="roulette-rolls-container h-12 px-3 font-normal text-base"
+      >
+        <span class="font-light"> User1 </span>
+      </button>
+      <button
+        class="roulette-rolls-container h-12 px-3 font-normal text-base"
+      >
+        <span class="font-light"> User2 </span>
+      </button>
+      <button
+        class="roulette-rolls-container h-12 px-3 font-normal text-base"
+      >
+        <span class="font-light"> User3 </span>
+      </button>
+      <button
+        class="roulette-rolls-container h-12 px-3 font-normal text-base"
+      >
+        <span class="font-light"> User4 </span>
+      </button>
     </div>
     <div class="game-name">ROULETTE</div>
     <div>
