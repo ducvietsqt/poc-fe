@@ -37,19 +37,42 @@
         <div class="button-text">SOUNDS</div>
       </div>
     </div>
+    <div
+      class="alert-message-container alert-bets"
+      :class="{
+        'alert-message-visible': alerBets,
+      }"
+      @click="alerBets = false"
+    >
+      <div class="alert-message">PLEASE PLACE YOUR BETS</div>
+    </div>
   </div>
 </template>
 <script>
+import { mapActions, mapMutations } from "vuex";
 export default {
-  name: "organism-selections-container",
+  name: "organism-selections",
   props: {
-    account: {
-      type: String,
+    betSum: {
+      type: Number,
     },
   },
+  data() {
+    return {
+      alerBets: false,
+    };
+  },
   methods: {
+    ...mapActions({
+      spin: "roulette/spin",
+    }),
+    ...mapMutations({
+      handleReset: "roulette/RESET_ROULETTE",
+    }),
     handleSpin() {
-      
+      console.log(`handleSpin`);
+
+      this.alerBets = true;
     },
   },
 };

@@ -1,3 +1,7 @@
+import {
+  BETTING,
+} from "@/constants/roulette.constant";
+
 export default () => ({
   history: {
     columns: [
@@ -67,5 +71,6 @@ export default () => ({
     },]
   },
   spin: false,
-  number: -1
+  number: 0,
+  betting: Object.assign({}, BETTING),
 });

@@ -1,1 +1,2 @@
 export const UPDATE_ROULETTE = "UPDATE_ROULETTE";
+export const RESET_ROULETTE = "RESET_ROULETTE";

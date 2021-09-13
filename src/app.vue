@@ -261,7 +261,45 @@
             </div>
           </div>
         </div>
-       
+        <div class="selections-container">
+          <div class="betting-chips-container">
+            <div
+              class="
+                betting-chip betting-chip-menu betting-chip-menu5 betting-chip5
+                active-chip
+              "
+              id="chip5"
+            >
+              5
+            </div>
+          </div>
+          <div class="menu-container">
+            <div class="button button-spin" @click="handleSpin">
+              <div class="circle">
+                <i class="fas fa-play icon"></i>
+              </div>
+              <div class="circle-overlay"></div>
+              <div class="button-text">SPIN</div>
+            </div>
+            <div class="button button-reset" @click="handleReset">
+              <div class="circle">
+                <i class="fas fa-plus icon"></i>
+              </div>
+              <div class="circle-overlay"></div>
+
+              <div class="button-text">RESET</div>
+            </div>
+            <div class="button button-sound">
+              <div class="circle">
+                <i class="fas fa-volume-up icon icon1"></i>
+                <div class="cross-line"></div>
+              </div>
+              <div class="circle-overlay"></div>
+
+              <div class="button-text">SOUNDS</div>
+            </div>
+          </div>
+        </div>
         <div class="pt-5 pb-32">
           <h1 class="text-white">HISTORY</h1>
           <a-table
@@ -319,30 +357,7 @@
           </div>
         </div>
 
-        <div
-          class="alert-message-container alert-spin-result"
-          :class="{
-            'alert-message-visible': spined,
-          }"
-          @click="spined = false"
-        >
-          <div
-            class="results"
-            :class="{
-              'alert-message-opacity': spined,
-            }"
-          >
-            <div class="odd-even text">
-              {{ rouletteNumber % 2 == 1 ? "ODD" : "EVEN" }}
-            </div>
-            <div class="high-low text">
-              {{ rouletteNumber >= 19 ? "LOW" : "HIGH" }}
-            </div>
-            <div class="roll-number text">{{ rouletteNumber }}</div>
-            <div class="win-lose text">WIN</div>
-            <div class="win-amount text">100</div>
-          </div>
-        </div>
+       <MoleculeAlertSpinResult :spined="spined" :rouletteNumber="rouletteNumber" :win="win"/>
 
         <div
           class="alert-message-container alert-game-over"
@@ -373,6 +388,7 @@
 import MixinMetamaskConnect from "@/mixins/metamask-connect.mixin";
 import AtomNotify from "@/components/atoms/notify.atom";
 import MoleculeRouletteWheel from "@/components/molecules/roulette-wheel.molecule";
+import MoleculeAlertSpinResult from "@/components/molecules/alerts/spin-result.alert.molecule";
 import MoleculeModalLogout from "@/components/molecules/modals/logout.modal.molecule";
 import OrganismTopBar from "@/components/organisms/top-bar.organism";
 import { NUMBERS } from "@/constants/types.constant";
@@ -380,10 +396,9 @@ import {
   RENDER_NUMBERS,
   RED_NUMBERS,
   BLACK_NUMBERS,
-  DEFAULT,
 } from "@/constants/roulette.constant";
 
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -392,7 +407,8 @@ export default {
     AtomNotify,
     MoleculeModalLogout,
     MoleculeRouletteWheel,
-    OrganismTopBar
+    OrganismTopBar,
+    MoleculeAlertSpinResult
   },
   data() {
     return {
@@ -409,114 +425,33 @@ export default {
       columnOddHover: false,
       columnRedHover: false,
       columnBlackHover: false,
-      spined: false,
       alerBets: false,
-      betting: Object.assign({}, DEFAULT.BETTING),
       NUMBERS,
       rouletteNumbersAmount: 37,
       ballLandingNumber: 0,
       alertMessageVisible: false,
-      rouletteNumber: -1,
     };
   },
   computed: {
     ...mapState({
       account: (state) => state.wallet.provider?.address || "",
       history: (state) => state.roulette.history || {},
+      betting: (state) => state.roulette.betting || {},
+      spined: (state) => state.roulette.spin || false,
+      rouletteNumber: (state) => state.roulette.number || 0,
     }),
-    betSum() {
-      let sum = 0;
-      for (const key in this.betting) {
-        if (Object.hasOwnProperty.call(this.betting, key)) {
-          sum += this.betting[key];
-        }
-      }
-      return sum;
-    },
-    win() {
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber % 2 == 0 && this.rouletteNumber != 0,
-          this.betting.even
-        )
-      ) {
-        return true;
-      }
-      if (this.areaBetCheck(this.rouletteNumber % 2 == 1, this.betting.odd)) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber <= 18 && this.rouletteNumber != 0,
-          this.betting.oneToEighteen
-        )
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber >= 19,
-          this.betting.nineteenToThirtysix
-        )
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber <= 12 && this.rouletteNumber != 0,
-          this.betting.oneToEighteen
-        )
-      ) {
-        return true;
-      }
-
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber >= 13 && this.rouletteNumber <= 24,
-          this.betting.thirteenToTwentyfour
-        )
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber >= 25,
-          this.betting.twentyfiveToThirtysix
-        )
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(
-          this.rouletteNumber % 3 == 0 && this.rouletteNumber != 0,
-          this.betting.lineOne
-        )
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(this.rouletteNumber % 3 == 2, this.betting.lineTwo)
-      ) {
-        return true;
-      }
-      if (
-        this.areaBetCheck(this.rouletteNumber % 3 == 1, this.betting.lineThree)
-      ) {
-        return true;
-      }
-
-      // for (let i = 0; i <= 36; i++) {
-      //   if (i < 18) {
-      //   }
-      // }
-
-      return false;
-    },
+    ...mapGetters({
+      betSum: "roulette/getBetSum",
+      win: "roulette/win",
+    }),
   },
   methods: {
-    areaBetCheck(equation, bet) {
-      return equation && bet;
-    },
+    ...mapMutations({
+      handleReset: "roulette/RESET_ROULETTE",
+    }),
+    ...mapActions({
+      spin: "roulette/spin",
+    }),
     compileRenderNumberClass(number) {
       const HOVER_CLASS = "bg-white bg-opacity-50";
       if (this.one2to1Hover && number % 3 == 0) {
@@ -557,16 +492,9 @@ export default {
       }
       return "";
     },
-    handleReset() {
-      this.betting = Object.assign({}, DEFAULT.BETTING);
-    },
     handleSpin() {
       if (this.betSum == 0) return (this.alerBets = true);
-
-      this.rouletteNumber = Math.floor(
-        Math.random() * this.rouletteNumbersAmount + 0
-      );
-      this.spined = true;
+      this.spin();
     },
   },
 };
