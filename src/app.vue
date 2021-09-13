@@ -2,57 +2,11 @@
   <div id="app">
     <div class="website-wrapper" id="website-wrapper">
       <div class="roulette-table">
-        <div class="top-bar">
-          <div class="roulette-rolls-container">
-            <div class="roll roll5"></div>
-            <div class="roll roll4"></div>
-            <div class="roll roll3"></div>
-            <div class="roll roll2"></div>
-            <div class="roll roll1"></div>
-            <div class="roll roll-last"></div>
-          </div>
-          <div class="game-name">ROULETTE</div>
-          <div>
-            <button
-              v-if="!account"
-              class="roulette-rolls-container h-12 px-7 font-normal"
-              style="font-size: 2rem"
-              @click="handleConnectButtonClick"
-            >
-              <span class="font-light"> Connect </span>
-            </button>
-            <button
-              v-else
-              class="roulette-rolls-container h-12 px-7 font-normal"
-              style="font-size: 2rem"
-              @click="$modal.show('modal-logout')"
-            >
-              <span class="font-light">
-                {{ account | truncate(8, 4, 4) }}
-              </span>
-            </button>
-          </div>
-          <!-- <div class="min-max-bet">
-            <div class="min-bet bet-size">
-              <span class="text-color">MIN:</span> $5.00
-            </div>
-            <div class="max-bet bet-size">
-              <span class="text-color">MAX:</span> $1000.00
-            </div>
-          </div> -->
-        </div>
-        <div class="roulette-wheel-container">
-          <div class="roulette-wheel">
-            <div class="roulette-wheel-main roulette-image"></div>
-            <div class="roulette-center roulette-image"></div>
-            <div class="roulette-cross-shadow roulette-image"></div>
-            <div class="roulette-cross roulette-image">
-              <div class="number-glow-container"></div>
-            </div>
-            <div class="ball-container"></div>
-          </div>
-        </div>
-
+        <OrganismTopBar :account="account" />
+        <MoleculeRouletteWheel
+          :spin="spined"
+          :rouletteNumber="rouletteNumber"
+        />
         <div class="betting-area" style="width: 1084px; height: 407.2px">
           <div class="top-area">
             <div
@@ -64,992 +18,71 @@
                 part
                 hover:bg-white hover:bg-opacity-50
               "
-              @click="bettingChips.zero++"
+              @click="betting[NUMBERS.ZERO]++"
             >
               <div
-                v-if="bettingChips.zero"
+                v-if="betting[NUMBERS.ZERO]"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.zero * 5 }}
+                {{ betting[NUMBERS.ZERO] * 5 }}
               </div>
             </div>
             <div
               class="number number3 hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.three++"
+              v-for="item in RENDER_NUMBERS"
+              :key="item"
+              :class="compileRenderNumberClass(item)"
+              @click="betting[item]++"
             >
               <div
-                v-if="bettingChips.three"
+                v-if="betting[item]"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.three * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number2 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.two++"
-            >
-              <div
-                v-if="bettingChips.two"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.two * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number1 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.one++"
-            >
-              <div
-                v-if="bettingChips.one"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.one * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number6 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.six++"
-            >
-              <div
-                v-if="bettingChips.six"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.six * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number5 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.five++"
-            >
-              <div
-                v-if="bettingChips.five"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.five * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number4 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.four++"
-            >
-              <div
-                v-if="bettingChips.four"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.four * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number9 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.nine++"
-            >
-              <div
-                v-if="bettingChips.nine"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.nine * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number8 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.eight++"
-            >
-              <div
-                v-if="bettingChips.eight"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.eight * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number7 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.seven++"
-            >
-              <div
-                v-if="bettingChips.seven"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.seven * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number12 hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.twelve++"
-            >
-              <div
-                v-if="bettingChips.twelve"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twelve * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number11 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.eleven++"
-            >
-              <div
-                v-if="bettingChips.eleven"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.eleven * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number10 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column1st12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.ten++"
-            >
-              <div
-                v-if="bettingChips.ten"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.ten * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number15 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.fifteen++"
-            >
-              <div
-                v-if="bettingChips.fifteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.fifteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number14 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.fourteen++"
-            >
-              <div
-                v-if="bettingChips.fourteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.fourteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number13 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.thirteen++"
-            >
-              <div
-                v-if="bettingChips.thirteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number18 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.eighteen++"
-            >
-              <div
-                v-if="bettingChips.eighteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.eighteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number17 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.seventeen++"
-            >
-              <div
-                v-if="bettingChips.seventeen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.seventeen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number16 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column1to18Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.sixteen++"
-            >
-              <div
-                v-if="bettingChips.sixteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.sixteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number21 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.twentyone++"
-            >
-              <div
-                v-if="bettingChips.twentyone"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentyone * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number20 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twenty++"
-            >
-              <div
-                v-if="bettingChips.twenty"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twenty * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number19 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.nineteen++"
-            >
-              <div
-                v-if="bettingChips.nineteen"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.nineteen * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number24 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twentyfour++"
-            >
-              <div
-                v-if="bettingChips.twentyfour"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentyfour * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number23 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.twentythree++"
-            >
-              <div
-                v-if="bettingChips.twentythree"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentythree * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number22 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column2nd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twentytwo++"
-            >
-              <div
-                v-if="bettingChips.twentytwo"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentytwo * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number27 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.twentyseven++"
-            >
-              <div
-                v-if="bettingChips.twentyseven"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentyseven * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number26 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twentysix++"
-            >
-              <div
-                v-if="bettingChips.twentysix"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentysix * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number25 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.twentyfive++"
-            >
-              <div
-                v-if="bettingChips.twentyfive"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentyfive * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number30 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.thirty++"
-            >
-              <div
-                v-if="bettingChips.thirty"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirty * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number29 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twentynine++"
-            >
-              <div
-                v-if="bettingChips.twentynine"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentynine * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number28 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.twentyeight++"
-            >
-              <div
-                v-if="bettingChips.twentyeight"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.twentyeight * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number33 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.thirtythree++"
-            >
-              <div
-                v-if="bettingChips.thirtythree"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtythree * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number32 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.thirtytwo++"
-            >
-              <div
-                v-if="bettingChips.thirtytwo"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtytwo * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number31 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.thirtyone++"
-            >
-              <div
-                v-if="bettingChips.thirtyone"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtyone * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number36 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  one2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.thirtysix++"
-            >
-              <div
-                v-if="bettingChips.thirtysix"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtysix * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number35 black hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-                'bg-opacity-50':
-                  two2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnOddHover ||
-                  columnBlackHover,
-              }"
-              @click="bettingChips.thirtyfive++"
-            >
-              <div
-                v-if="bettingChips.thirtyfive"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtyfive * 5 }}
-              </div>
-            </div>
-            <div
-              class="number number34 red hover:bg-white hover:bg-opacity-50"
-              :class="{
-                'bg-white':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-                'bg-opacity-50':
-                  three2to1Hover ||
-                  column3rd12Hover ||
-                  column19to36Hover ||
-                  columnEvenHover ||
-                  columnRedHover,
-              }"
-              @click="bettingChips.thirtyfour++"
-            >
-              <div
-                v-if="bettingChips.thirtyfour"
-                id="5"
-                class="betting-chip betting-chip-shadow betting-chip5"
-              >
-                {{ bettingChips.thirtyfour * 5 }}
+                {{ betting[item] * 5 }}
               </div>
             </div>
             <div
               class="number bet2to1-1 part hover:bg-white hover:bg-opacity-50"
               @mouseover="one2to1Hover = true"
               @mouseout="one2to1Hover = false"
-              @click="bettingChips.lineOne++"
+              @click="betting.lineOne++"
             >
               <div
-                v-if="bettingChips.lineOne"
+                v-if="betting.lineOne"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.lineOne * 5 }}
+                {{ betting.lineOne * 5 }}
               </div>
             </div>
             <div
               class="number bet2to1-2 part hover:bg-white hover:bg-opacity-50"
               @mouseover="two2to1Hover = true"
               @mouseout="two2to1Hover = false"
-              @click="bettingChips.lineTwo++"
+              @click="betting.lineTwo++"
             >
               <div
-                v-if="bettingChips.lineTwo"
+                v-if="betting.lineTwo"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.lineTwo * 5 }}
+                {{ betting.lineTwo * 5 }}
               </div>
             </div>
             <div
               class="number bet2to1-3 part hover:bg-white hover:bg-opacity-50"
               @mouseover="three2to1Hover = true"
               @mouseout="three2to1Hover = false"
-              @click="bettingChips.lineThree++"
+              @click="betting.lineThree++"
             >
               <div
-                v-if="bettingChips.lineThree"
+                v-if="betting.lineThree"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.lineThree * 5 }}
+                {{ betting.lineThree * 5 }}
               </div>
             </div>
           </div>
@@ -1063,14 +96,14 @@
               "
               @mouseover="column1st12Hover = true"
               @mouseout="column1st12Hover = false"
-              @click="bettingChips.oneToTwelve++"
+              @click="betting.oneToTwelve++"
             >
               <div
-                v-if="bettingChips.oneToTwelve"
+                v-if="betting.oneToTwelve"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.oneToTwelve * 5 }}
+                {{ betting.oneToTwelve * 5 }}
               </div>
             </div>
             <div
@@ -1082,14 +115,14 @@
               "
               @mouseover="column2nd12Hover = true"
               @mouseout="column2nd12Hover = false"
-              @click="bettingChips.thirteenToTwentyfour++"
+              @click="betting.thirteenToTwentyfour++"
             >
               <div
-                v-if="bettingChips.thirteenToTwentyfour"
+                v-if="betting.thirteenToTwentyfour"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.thirteenToTwentyfour * 5 }}
+                {{ betting.thirteenToTwentyfour * 5 }}
               </div>
             </div>
             <div
@@ -1101,14 +134,14 @@
               "
               @mouseover="column3rd12Hover = true"
               @mouseout="column3rd12Hover = false"
-              @click="bettingChips.twentyfiveToThirtysix++"
+              @click="betting.twentyfiveToThirtysix++"
             >
               <div
-                v-if="bettingChips.twentyfiveToThirtysix"
+                v-if="betting.twentyfiveToThirtysix"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.twentyfiveToThirtysix * 5 }}
+                {{ betting.twentyfiveToThirtysix * 5 }}
               </div>
             </div>
             <div
@@ -1120,14 +153,14 @@
               "
               @mouseover="column1to18Hover = true"
               @mouseout="column1to18Hover = false"
-              @click="bettingChips.oneToEighteen++"
+              @click="betting.oneToEighteen++"
             >
               <div
-                v-if="bettingChips.oneToEighteen"
+                v-if="betting.oneToEighteen"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.oneToEighteen * 5 }}
+                {{ betting.oneToEighteen * 5 }}
               </div>
             </div>
 
@@ -1140,14 +173,14 @@
               "
               @mouseover="columnEvenHover = true"
               @mouseout="columnEvenHover = false"
-              @click="bettingChips.even++"
+              @click="betting.even++"
             >
               <div
-                v-if="bettingChips.even"
+                v-if="betting.even"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.even * 5 }}
+                {{ betting.even * 5 }}
               </div>
             </div>
             <div
@@ -1159,14 +192,14 @@
               "
               @mouseover="columnRedHover = true"
               @mouseout="columnRedHover = false"
-              @click="bettingChips.red++"
+              @click="betting.red++"
             >
               <div
-                v-if="bettingChips.red"
+                v-if="betting.red"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.red * 5 }}
+                {{ betting.red * 5 }}
               </div>
             </div>
             <div
@@ -1178,14 +211,14 @@
               "
               @mouseover="columnBlackHover = true"
               @mouseout="columnBlackHover = false"
-              @click="bettingChips.black++"
+              @click="betting.black++"
             >
               <div
-                v-if="bettingChips.black"
+                v-if="betting.black"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.black * 5 }}
+                {{ betting.black * 5 }}
               </div>
             </div>
             <div
@@ -1197,14 +230,14 @@
               "
               @mouseover="columnOddHover = true"
               @mouseout="columnOddHover = false"
-              @click="bettingChips.odd++"
+              @click="betting.odd++"
             >
               <div
-                v-if="bettingChips.odd"
+                v-if="betting.odd"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.odd * 5 }}
+                {{ betting.odd * 5 }}
               </div>
             </div>
             <div
@@ -1216,60 +249,26 @@
               "
               @mouseover="column19to36Hover = true"
               @mouseout="column19to36Hover = false"
-              @click="bettingChips.nineteenToThirtysix++"
+              @click="betting.nineteenToThirtysix++"
             >
               <div
-                v-if="bettingChips.nineteenToThirtysix"
+                v-if="betting.nineteenToThirtysix"
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ bettingChips.nineteenToThirtysix * 5 }}
+                {{ betting.nineteenToThirtysix * 5 }}
               </div>
             </div>
           </div>
         </div>
-        <div class="selections-container">
-          <div class="betting-chips-container">
-            <div
-              class="
-                betting-chip betting-chip-menu betting-chip-menu5 betting-chip5
-                active-chip
-              "
-              id="chip5"
-            >
-              5
-            </div>
-          </div>
-          <div class="menu-container">
-            <div class="button button-spin">
-              <div class="circle">
-                <i class="fas fa-play icon"></i>
-              </div>
-              <div class="circle-overlay"></div>
-              <div class="button-text">SPIN</div>
-            </div>
-            <div class="button button-reset" @click="handleReset">
-              <div class="circle">
-                <i class="fas fa-plus icon"></i>
-              </div>
-              <div class="circle-overlay"></div>
-
-              <div class="button-text">RESET</div>
-            </div>
-            <div class="button button-sound">
-              <div class="circle">
-                <i class="fas fa-volume-up icon icon1"></i>
-                <div class="cross-line"></div>
-              </div>
-              <div class="circle-overlay"></div>
-
-              <div class="button-text">SOUNDS</div>
-            </div>
-          </div>
-        </div>
+       
         <div class="pt-5 pb-32">
           <h1 class="text-white">HISTORY</h1>
-          <a-table class="text-white" :columns="columns" :data-source="data">
+          <a-table
+            class="text-white"
+            :columns="history.columns"
+            :data-source="history.data"
+          >
             <span slot="content" slot-scope="text" class="text-white">{{
               text
             }}</span>
@@ -1288,31 +287,70 @@
         </div>
 
         <!-- Alert messages start ---------------------------------------------------------------->
-        <div class="alert-message-container alert-bets">
+        <div
+          class="alert-message-container alert-bets"
+          :class="{
+            'alert-message-visible': alerBets,
+          }"
+          @click="alerBets = false"
+        >
           <div class="alert-message">PLEASE PLACE YOUR BETS</div>
         </div>
 
-        <div class="alert-message-container alert-money">
+        <div
+          class="alert-message-container alert-money"
+          :class="{
+            'alert-message-visible': alertMessageVisible,
+          }"
+          @click="alertMessageVisible = false"
+        >
           <div class="alert-message">NOT ENOUGH MONEY</div>
         </div>
 
-        <div class="alert-message-container alert-max-bet">
+        <div
+          class="alert-message-container alert-max-bet"
+          :class="{
+            'alert-message-visible': alertMessageVisible,
+          }"
+          @click="alertMessageVisible = false"
+        >
           <div class="alert-message">
             YOU SHOULD NOT EXCEED MAXIMUM BET OF $1000
           </div>
         </div>
 
-        <div class="alert-message-container alert-spin-result">
-          <div class="results">
-            <div class="odd-even text">ODD</div>
-            <div class="high-low text">HIGH</div>
-            <div class="roll-number text">26</div>
+        <div
+          class="alert-message-container alert-spin-result"
+          :class="{
+            'alert-message-visible': spined,
+          }"
+          @click="spined = false"
+        >
+          <div
+            class="results"
+            :class="{
+              'alert-message-opacity': spined,
+            }"
+          >
+            <div class="odd-even text">
+              {{ rouletteNumber % 2 == 1 ? "ODD" : "EVEN" }}
+            </div>
+            <div class="high-low text">
+              {{ rouletteNumber >= 19 ? "LOW" : "HIGH" }}
+            </div>
+            <div class="roll-number text">{{ rouletteNumber }}</div>
             <div class="win-lose text">WIN</div>
             <div class="win-amount text">100</div>
           </div>
         </div>
 
-        <div class="alert-message-container alert-game-over">
+        <div
+          class="alert-message-container alert-game-over"
+          :class="{
+            'alert-message-visible': alertMessageVisible,
+          }"
+          @click="alertMessageVisible = false"
+        >
           <div class="alert-message">
             <div class="text text1">YOU ARE OUT OF MONEY.</div>
             <div class="text text2">WOULD YOU LIKE TO PLAY AGAIN?</div>
@@ -1334,134 +372,18 @@
 <script>
 import MixinMetamaskConnect from "@/mixins/metamask-connect.mixin";
 import AtomNotify from "@/components/atoms/notify.atom";
+import MoleculeRouletteWheel from "@/components/molecules/roulette-wheel.molecule";
 import MoleculeModalLogout from "@/components/molecules/modals/logout.modal.molecule";
+import OrganismTopBar from "@/components/organisms/top-bar.organism";
+import { NUMBERS } from "@/constants/types.constant";
+import {
+  RENDER_NUMBERS,
+  RED_NUMBERS,
+  BLACK_NUMBERS,
+  DEFAULT,
+} from "@/constants/roulette.constant";
 
 import { mapState } from "vuex";
-
-// const NUMBERS_RED = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
-// const NUMBERS_BLACK = [2, 4, 6, 8, 11, 10, 13, 15, 17, 20, 24, 22, 26, 28, 29, 31, 33, 35]
-
-const columns = [
-  {
-    title: "Spin",
-    dataIndex: "spin",
-    key: "spin",
-    scopedSlots: { customRender: "content" },
-  },
-  {
-    title: "Number",
-    dataIndex: "number",
-    key: "number",
-    scopedSlots: { customRender: "content" },
-  },
-  {
-    title: "Bet Unit",
-    dataIndex: "betUnit",
-    key: "betUnit",
-    scopedSlots: { customRender: "content" },
-  },
-  {
-    title: "Win",
-    key: "win",
-    dataIndex: "win",
-    scopedSlots: { customRender: "content" },
-  },
-  {
-    title: "Lost",
-    key: "lost",
-    dataIndex: "lost",
-    scopedSlots: { customRender: "content" },
-  },
-  {
-    title: "Bet Layout",
-    key: "betLayout",
-    dataIndex: "betLayout",
-    scopedSlots: { customRender: "content" },
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    spin: 2,
-    number: 36,
-    betUnit: 9,
-    win: 0,
-    lost: -9,
-    betLayout: "1,2,3,8,9,12,24,30,32",
-  },
-  {
-    key: "2",
-    spin: 1,
-    number: 23,
-    betUnit: 5,
-    win: 1,
-    lost: -4,
-    betLayout: "2,5,6,8,23",
-  },
-  {
-    key: "3",
-    spin: 0,
-    number: 3,
-    betUnit: 6,
-    win: 0,
-    lost: -6,
-    betLayout: "2,5,7,9,12,34",
-  },
-];
-
-const BETTING_CHIPS_DEFAULT = {
-  zero: 0,
-  one: 0,
-  two: 0,
-  three: 0,
-  four: 0,
-  five: 0,
-  six: 0,
-  seven: 0,
-  eight: 0,
-  nine: 0,
-  ten: 0,
-  eleven: 0,
-  twelve: 0,
-  thirteen: 0,
-  fourteen: 0,
-  fifteen: 0,
-  sixteen: 0,
-  seventeen: 0,
-  eighteen: 0,
-  nineteen: 0,
-  twenty: 0,
-  twentyone: 0,
-  twentytwo: 0,
-  twentythree: 0,
-  twentyfour: 0,
-  twentyfive: 0,
-  twentysix: 0,
-  twentyseven: 0,
-  twentyeight: 0,
-  twentynine: 0,
-  thirty: 0,
-  thirtyone: 0,
-  thirtytwo: 0,
-  thirtythree: 0,
-  thirtyfour: 0,
-  thirtyfive: 0,
-  thirtysix: 0,
-  //Others
-  black: 0, //Placed on black
-  red: 0, //Placed on red
-  even: 0, //Placed on pair
-  odd: 0, //Placed on impair
-  oneToEighteen: 0, //Placed 1 - 18
-  nineteenToThirtysix: 0, //Placed 19 -36
-  oneToTwelve: 0, //Placed 1 - 12
-  thirteenToTwentyfour: 0, //Placed 13 - 24
-  twentyfiveToThirtysix: 0, //Placed 25 - 36
-  lineOne: 0,
-  lineTwo: 0,
-  lineThree: 0,
-};
 
 export default {
   name: "App",
@@ -1469,9 +391,12 @@ export default {
   components: {
     AtomNotify,
     MoleculeModalLogout,
+    MoleculeRouletteWheel,
+    OrganismTopBar
   },
   data() {
     return {
+      RENDER_NUMBERS,
       one2to1Hover: false,
       two2to1Hover: false,
       three2to1Hover: false,
@@ -1484,22 +409,164 @@ export default {
       columnOddHover: false,
       columnRedHover: false,
       columnBlackHover: false,
-      data,
-      columns,
-      bettingChips: Object.assign({}, BETTING_CHIPS_DEFAULT),
+      spined: false,
+      alerBets: false,
+      betting: Object.assign({}, DEFAULT.BETTING),
+      NUMBERS,
+      rouletteNumbersAmount: 37,
+      ballLandingNumber: 0,
+      alertMessageVisible: false,
+      rouletteNumber: -1,
     };
   },
   computed: {
     ...mapState({
       account: (state) => state.wallet.provider?.address || "",
+      history: (state) => state.roulette.history || {},
     }),
+    betSum() {
+      let sum = 0;
+      for (const key in this.betting) {
+        if (Object.hasOwnProperty.call(this.betting, key)) {
+          sum += this.betting[key];
+        }
+      }
+      return sum;
+    },
+    win() {
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber % 2 == 0 && this.rouletteNumber != 0,
+          this.betting.even
+        )
+      ) {
+        return true;
+      }
+      if (this.areaBetCheck(this.rouletteNumber % 2 == 1, this.betting.odd)) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber <= 18 && this.rouletteNumber != 0,
+          this.betting.oneToEighteen
+        )
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber >= 19,
+          this.betting.nineteenToThirtysix
+        )
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber <= 12 && this.rouletteNumber != 0,
+          this.betting.oneToEighteen
+        )
+      ) {
+        return true;
+      }
+
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber >= 13 && this.rouletteNumber <= 24,
+          this.betting.thirteenToTwentyfour
+        )
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber >= 25,
+          this.betting.twentyfiveToThirtysix
+        )
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(
+          this.rouletteNumber % 3 == 0 && this.rouletteNumber != 0,
+          this.betting.lineOne
+        )
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(this.rouletteNumber % 3 == 2, this.betting.lineTwo)
+      ) {
+        return true;
+      }
+      if (
+        this.areaBetCheck(this.rouletteNumber % 3 == 1, this.betting.lineThree)
+      ) {
+        return true;
+      }
+
+      // for (let i = 0; i <= 36; i++) {
+      //   if (i < 18) {
+      //   }
+      // }
+
+      return false;
+    },
   },
   methods: {
-    handleReset() {
-      this.bettingChips = Object.assign({}, BETTING_CHIPS_DEFAULT);
+    areaBetCheck(equation, bet) {
+      return equation && bet;
     },
-    handleConnectButtonClick() {
-      this.$root.$emit("btn-wallet-connect");
+    compileRenderNumberClass(number) {
+      const HOVER_CLASS = "bg-white bg-opacity-50";
+      if (this.one2to1Hover && number % 3 == 0) {
+        return HOVER_CLASS;
+      }
+      if (this.two2to1Hover && number % 3 == 2) {
+        return HOVER_CLASS;
+      }
+      if (this.three2to1Hover && number % 3 == 1) {
+        return HOVER_CLASS;
+      }
+      if (this.columnOddHover && number % 2 == 1) {
+        return HOVER_CLASS;
+      }
+      if (this.columnEvenHover && number % 2 == 0) {
+        return HOVER_CLASS;
+      }
+      if (this.column1st12Hover && number <= 12) {
+        return HOVER_CLASS;
+      }
+      if (this.column2nd12Hover && number >= 13 && number <= 24) {
+        return HOVER_CLASS;
+      }
+      if (this.column3rd12Hover && number >= 25) {
+        return HOVER_CLASS;
+      }
+      if (this.column1to18Hover && number <= 18) {
+        return HOVER_CLASS;
+      }
+      if (this.column19to36Hover && number >= 19) {
+        return HOVER_CLASS;
+      }
+      if (this.columnRedHover && RED_NUMBERS.indexOf(number) != -1) {
+        return HOVER_CLASS;
+      }
+      if (this.columnBlackHover && BLACK_NUMBERS.indexOf(number) != -1) {
+        return HOVER_CLASS;
+      }
+      return "";
+    },
+    handleReset() {
+      this.betting = Object.assign({}, DEFAULT.BETTING);
+    },
+    handleSpin() {
+      if (this.betSum == 0) return (this.alerBets = true);
+
+      this.rouletteNumber = Math.floor(
+        Math.random() * this.rouletteNumbersAmount + 0
+      );
+      this.spined = true;
     },
   },
 };

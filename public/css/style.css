@@ -239,7 +239,7 @@ div {
 }
 
 .roulette-table .roulette-wheel-container {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -998,7 +998,7 @@ div {
 }
 
 .alert-message-container {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
