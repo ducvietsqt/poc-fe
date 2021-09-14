@@ -22,54 +22,54 @@ export const BLACK_NUMBERS = [2, 4, 6, 8, 11, 10, 13, 15, 17, 20, 24, 22, 26, 28
 export const CHIP_NUMBER = 5;
 
 export const BETTING = {
-  [NUMBERS.ZERO]: 0,
-  [NUMBERS.ONE]: 0,
-  [NUMBERS.TWO]: 0,
-  [NUMBERS.THREE]: 0,
-  [NUMBERS.FOUR]: 0,
-  [NUMBERS.FIVE]: 0,
-  [NUMBERS.SIX]: 0,
-  [NUMBERS.SEVEN]: 0,
-  [NUMBERS.EIGHT]: 0,
-  [NUMBERS.NINE]: 0,
-  [NUMBERS.TEN]: 0,
-  [NUMBERS.ELEVEN]: 0,
-  [NUMBERS.TWELVE]: 0,
-  [NUMBERS.THIRTEEN]: 0,
-  [NUMBERS.FOURTEEN]: 0,
-  [NUMBERS.FIFTEEN]: 0,
-  [NUMBERS.SIXTEEN]: 0,
-  [NUMBERS.SEVENTEEN]: 0,
-  [NUMBERS.EIGHTEEN]: 0,
-  [NUMBERS.NINETEEN]: 0,
-  [NUMBERS.TWENTY]: 0,
-  [NUMBERS.TWENTYONE]: 0,
-  [NUMBERS.TWENTYTWO]: 0,
-  [NUMBERS.TWENTYTHREE]: 0,
-  [NUMBERS.TWENTYFOUR]: 0,
-  [NUMBERS.TWENTYFIVE]: 0,
-  [NUMBERS.TWENTYSIX]: 0,
-  [NUMBERS.TWENTYSEVEN]: 0,
-  [NUMBERS.TWENTYEIGHT]: 0,
-  [NUMBERS.TWENTYNINE]: 0,
-  [NUMBERS.THIRTY]: 0,
-  [NUMBERS.THIRTYONE]: 0,
-  [NUMBERS.THIRTYTWO]: 0,
-  [NUMBERS.THIRTYTHREE]: 0,
-  [NUMBERS.THIRTYFOUR]: 0,
-  [NUMBERS.THIRTYFIVE]: 0,
-  [NUMBERS.THIRTYSIX]: 0,
+  [NUMBERS.ZERO]: false,
+  [NUMBERS.ONE]: false,
+  [NUMBERS.TWO]: false,
+  [NUMBERS.THREE]: false,
+  [NUMBERS.FOUR]: false,
+  [NUMBERS.FIVE]: false,
+  [NUMBERS.SIX]: false,
+  [NUMBERS.SEVEN]: false,
+  [NUMBERS.EIGHT]: false,
+  [NUMBERS.NINE]: false,
+  [NUMBERS.TEN]: false,
+  [NUMBERS.ELEVEN]: false,
+  [NUMBERS.TWELVE]: false,
+  [NUMBERS.THIRTEEN]: false,
+  [NUMBERS.FOURTEEN]: false,
+  [NUMBERS.FIFTEEN]: false,
+  [NUMBERS.SIXTEEN]: false,
+  [NUMBERS.SEVENTEEN]: false,
+  [NUMBERS.EIGHTEEN]: false,
+  [NUMBERS.NINETEEN]: false,
+  [NUMBERS.TWENTY]: false,
+  [NUMBERS.TWENTYONE]: false,
+  [NUMBERS.TWENTYTWO]: false,
+  [NUMBERS.TWENTYTHREE]: false,
+  [NUMBERS.TWENTYFOUR]: false,
+  [NUMBERS.TWENTYFIVE]: false,
+  [NUMBERS.TWENTYSIX]: false,
+  [NUMBERS.TWENTYSEVEN]: false,
+  [NUMBERS.TWENTYEIGHT]: false,
+  [NUMBERS.TWENTYNINE]: false,
+  [NUMBERS.THIRTY]: false,
+  [NUMBERS.THIRTYONE]: false,
+  [NUMBERS.THIRTYTWO]: false,
+  [NUMBERS.THIRTYTHREE]: false,
+  [NUMBERS.THIRTYFOUR]: false,
+  [NUMBERS.THIRTYFIVE]: false,
+  [NUMBERS.THIRTYSIX]: false,
   //Others
-  black: 0, //Placed on black
-  red: 0, //Placed on red
-  even: 0, //Placed on pair
-  odd: 0, //Placed on impair
-  oneToEighteen: 0, //Placed 1 - 18
-  nineteenToThirtysix: 0, //Placed 19 -36
-  oneToTwelve: 0, //Placed 1 - 12
-  thirteenToTwentyfour: 0, //Placed 13 - 24
-  twentyfiveToThirtysix: 0, //Placed 25 - 36
-  lineOne: 0,
-  lineTwo: 0,
-  lineThree: 0,
+  black: false, //Placed on black
+  red: false, //Placed on red
+  even: false, //Placed on pair
+  odd: false, //Placed on impair
+  oneToEighteen: false, //Placed 1 - 18
+  nineteenToThirtysix: false, //Placed 19 -36
+  oneToTwelve: false, //Placed 1 - 12
+  thirteenToTwentyfour: false, //Placed 13 - 24
+  twentyfiveToThirtysix: false, //Placed 25 - 36
+  lineOne: false,
+  lineTwo: false,
+  lineThree: false,
 }

@@ -4,18 +4,17 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 
-const PageHome = () => import("@/pages/home.page");
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: PageHome,
-    meta: {
-      title: "Home Page"
-    }
-  },
-  { path: "*", component: PageHome }
+  // {
+  //   path: "/",
+  //   name: "Home",
+  //   component: PageHome,
+  //   meta: {
+  //     title: "Home Page"
+  //   }
+  // },
+  // { path: "*", component: PageHome }
 ];
 
 const router = new VueRouter({

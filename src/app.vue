@@ -2,7 +2,7 @@
   <div id="app">
     <div class="website-wrapper" id="website-wrapper">
       <div class="roulette-table">
-        <OrganismTopBar :account="account" />
+        <OrganismTopBar :account="account" :list="userList" />
         <MoleculeRouletteWheel
           :spin="spined"
           :rouletteNumber="rouletteNumber"
@@ -25,7 +25,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting[NUMBERS.ZERO] * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -40,7 +40,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting[item] * 5 }}
+                {{CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -54,7 +54,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.lineOne * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -68,7 +68,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.lineTwo * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -82,7 +82,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.lineThree * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.oneToTwelve * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -122,7 +122,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.thirteenToTwentyfour * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -141,7 +141,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.twentyfiveToThirtysix * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -160,7 +160,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.oneToEighteen * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
 
@@ -180,7 +180,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.even * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -199,7 +199,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.red * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -218,7 +218,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.black * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -237,7 +237,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.odd * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
             <div
@@ -256,7 +256,7 @@
                 id="5"
                 class="betting-chip betting-chip-shadow betting-chip5"
               >
-                {{ betting.nineteenToThirtysix * 5 }}
+                {{ CHIP_NUMBER }}
               </div>
             </div>
           </div>
@@ -404,6 +404,7 @@ export default {
   computed: {
     ...mapState({
       account: (state) => state.wallet.provider?.address || "",
+      userList: (state) => state.user.list || "",
       balance: (state) => state.wallet.balance || false,
       history: (state) => state.roulette.history || {},
       betting: (state) => state.roulette.betting || {},
@@ -422,6 +423,7 @@ export default {
     }),
     ...mapActions({
       spin: "roulette/spin",
+      fetchUserList: "user/list",
     }),
     compileRenderNumberClass(number) {
       const HOVER_CLASS = "bg-white bg-opacity-50";
@@ -468,13 +470,16 @@ export default {
       this.spin();
     },
     handleBet(index) {
-      if (this.balance < this.betSum + CHIP_NUMBER)
-        return (this.alerMoney = true);
+      // if (this.balance < this.betSum + CHIP_NUMBER)
+      //   return (this.alerMoney = true);
       this.updateBetting({
         ...this.betting,
-        [index]: this.betting[index] + 1,
+        [index]: !this.betting[index],
       });
     },
+  },
+  mounted() {
+    this.fetchUserList();
   },
 };
 </script>

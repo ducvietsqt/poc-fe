@@ -8,5 +8,6 @@ export const CHAIN_ID = NETWORK == 'mainnet' ? 1 : 4
 export const CHAIN_NAME = NETWORK == 'mainnet' ? "Ethereum Mainnet" : 'Rinkeby Test Network'
 export const CHAIN_NATIVE_CURRENCY = { name: "ETH", symbol: "ETH", decimals: 18 }
 export const EXPLORER_URL = NETWORK == 'mainnet' ? "https://etherscan.io" : "https://rinkeby.etherscan.io"
-
+export const API_URL = process.env.VUE_APP_BASE_URL || "https://poc-roulette-api.vinaweb.app/api/v1"
+export const LOCALE = process.env.VUE_APP_I18N_LOCALE || "en"
 //CONTRACTs

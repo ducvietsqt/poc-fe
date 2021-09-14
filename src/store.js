@@ -5,6 +5,7 @@ import { APP_NAME, APP_VERSION } from '@/env'
 
 import wallet from "./store/wallet/index.wallet.store";
 import roulette from "./store/roulette/index.roulette.store";
+import user from "./store/user/index.user.store";
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ const persistenceOptions = {
 export default new Vuex.Store({
   modules: {
     wallet,
-    roulette
+    roulette,
+    user
   },
   plugins: [new VuexPersistence(persistenceOptions).plugin]
 });

@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./app.vue";
 import router from "./router";
 import store from "./store";
+import http from "./utils/http.util";
 import VModal from 'vue-js-modal'
 import VueClipboard from "vue-clipboard2";
 import Notifications from 'vue-notification'
@@ -19,6 +20,8 @@ Vue.use(Antd);
 Vue.use(VModal)
 Vue.use(VueClipboard);
 Vue.use(Notifications)
+
+Vue.prototype.$http = http;
 
 new Vue({
   store,
