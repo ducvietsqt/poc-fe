@@ -288,7 +288,8 @@
         </div>
         <div class="button button-spin" @click="handleSpin">
           <div class="circle">
-            <i class="fas fa-play icon"></i>
+            <AtomSpin class="h-5 w-5 align-middle" v-if="spinPending" />
+            <i class="fas fa-play icon" v-else></i>
           </div>
           <div class="circle-overlay"></div>
           <div class="button-text">SPIN</div>
@@ -372,7 +373,7 @@ export default {
     OrganismTopBar,
     MoleculeAlertSpinResult,
     OrganismBettingsHistory,
-    AtomSpin
+    AtomSpin,
   },
   data() {
     return {
@@ -397,6 +398,7 @@ export default {
       alertMessageVisible: false,
       CHIP_NUMBER,
       betPending: false,
+      spinPending: false,
     };
   },
   computed: {
@@ -468,7 +470,17 @@ export default {
     },
     handleSpin() {
       if (this.betSum == 0) return (this.alerBets = true);
-      this.spin();
+
+      this.spinPending = true;
+      setTimeout(async () => {
+        try {
+          await this.spin();
+        } catch (error) {
+          Notify.error(this.$notify, error);
+        } finally {
+          this.spinPending = false;
+        }
+      }, 100);
     },
     handleBet(index) {
       // if (this.balance < this.betSum + CHIP_NUMBER)
