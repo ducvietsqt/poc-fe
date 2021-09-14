@@ -286,18 +286,7 @@
         </div>
       </div>
     </div>
-    <div class="pt-5 pb-32">
-      <h1 class="text-white">HISTORY</h1>
-      <a-table
-        class="text-white"
-        :columns="history.columns"
-        :data-source="history.data"
-      >
-        <span slot="content" slot-scope="text" class="text-white">{{
-          text
-        }}</span>
-      </a-table>
-    </div>
+    <OrganismBettingsHistory class="pt-5 pb-32" :bettings="bettings" />
 
     <div class="money-container fixed bottom-0">
       <div class="cash-area area">
@@ -342,17 +331,17 @@
 
 <script>
 import MixinMetamaskConnect from "@/mixins/metamask-connect.mixin";
-import AtomNotify from "@/components/atoms/notify.atom";
 import MoleculeRouletteWheel from "@/components/molecules/roulette-wheel.molecule";
 import MoleculeAlertSpinResult from "@/components/molecules/alerts/spin-result.alert.molecule";
-import MoleculeModalLogout from "@/components/molecules/modals/logout.modal.molecule";
 import OrganismTopBar from "@/components/organisms/top-bar.organism";
+import OrganismBettingsHistory from "@/components/organisms/bettings-history.organism";
 import { NUMBERS } from "@/constants/types.constant";
 import {
   RENDER_NUMBERS,
   RED_NUMBERS,
   BLACK_NUMBERS,
   CHIP_NUMBER,
+  BETTING,
 } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
@@ -361,11 +350,10 @@ export default {
   name: "App",
   mixins: [MixinMetamaskConnect],
   components: {
-    AtomNotify,
-    MoleculeModalLogout,
     MoleculeRouletteWheel,
     OrganismTopBar,
     MoleculeAlertSpinResult,
+    OrganismBettingsHistory,
   },
   data() {
     return {
@@ -384,6 +372,7 @@ export default {
       columnBlackHover: false,
       alerBets: false,
       alerMoney: false,
+      betting: Object.assign({}, BETTING),
       NUMBERS,
       rouletteNumbersAmount: 37,
       ballLandingNumber: 0,
@@ -397,7 +386,7 @@ export default {
       userList: (state) => state.user.list || "",
       balance: (state) => state.wallet.balance || false,
       history: (state) => state.roulette.history || {},
-      betting: (state) => state.roulette.betting || {},
+      bettings: (state) => state.user.bettings || [],
       spined: (state) => state.roulette.spin || false,
       rouletteNumber: (state) => state.roulette.number || 0,
     }),
@@ -414,6 +403,7 @@ export default {
     ...mapActions({
       spin: "roulette/spin",
       fetchUserList: "user/list",
+      fetchUserDetail: "user/detail",
     }),
     compileRenderNumberClass(number) {
       const HOVER_CLASS = "bg-white bg-opacity-50";
@@ -462,14 +452,13 @@ export default {
     handleBet(index) {
       // if (this.balance < this.betSum + CHIP_NUMBER)
       //   return (this.alerMoney = true);
-      this.updateBetting({
-        ...this.betting,
-        [index]: !this.betting[index],
-      });
+      this.betting[index] = !this.betting[index];
     },
   },
   mounted() {
-    this.fetchUserList();
+    this.fetchUserDetail({
+      userId: this.$route.params.userId || 1,
+    });
   },
 };
 </script>

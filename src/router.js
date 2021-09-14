@@ -4,17 +4,19 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 
+const PageUser = () => import("@/pages/user.page");
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "Home",
-  //   component: PageHome,
-  //   meta: {
-  //     title: "Home Page"
-  //   }
-  // },
-  // { path: "*", component: PageHome }
+  {
+    path: "/",
+    redirect: { path: '/user/1' },
+  },
+  {
+    path: "/user/:userId",
+    name: 'Sunrise - Presale',
+    component: PageUser,
+  },
+  { path: "*", redirect: { path: '/user/1' }, }
 ];
 
 const router = new VueRouter({

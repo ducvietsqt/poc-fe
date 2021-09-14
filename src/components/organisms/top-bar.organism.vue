@@ -1,13 +1,14 @@
 <template>
   <div class="top-bar">
     <div class="grid grid-cols-4 gap-4">
-      <button
+      <a
+        :href="`/user/${item.id}`"
         v-for="item in list"
         :key="item.id"
         class="roulette-rolls-container h-12 px-3 font-normal text-base"
       >
-        <span class="font-light"> {{ item.user_name }} </span>
-      </button>
+        <span class="font-light text-white"> {{ item.user_name }} </span>
+      </a>
     </div>
     <div class="game-name">ROULETTE</div>
     <div>
