@@ -269,6 +269,23 @@
         </div>
       </div>
       <div class="menu-container">
+        <div class="button button-spin" @click="handleBetSet">
+          <div class="circle" id="chip200">
+            <AtomSpin class="h-5 w-5 align-middle" v-if="betPending" />
+            <div
+              v-else
+              class="
+                betting-chip
+                betting-chip-menu
+                betting-chip-menu200
+                betting-chip200
+              "
+              id="chip200"
+            ></div>
+          </div>
+          <div class="circle-overlay"></div>
+          <div class="button-text">BET</div>
+        </div>
         <div class="button button-spin" @click="handleSpin">
           <div class="circle">
             <i class="fas fa-play icon"></i>
@@ -335,6 +352,7 @@ import MoleculeRouletteWheel from "@/components/molecules/roulette-wheel.molecul
 import MoleculeAlertSpinResult from "@/components/molecules/alerts/spin-result.alert.molecule";
 import OrganismTopBar from "@/components/organisms/top-bar.organism";
 import OrganismBettingsHistory from "@/components/organisms/bettings-history.organism";
+import AtomSpin from "@/components/atoms/icons/spin.icon.atom";
 import { NUMBERS } from "@/constants/types.constant";
 import {
   RENDER_NUMBERS,
@@ -344,6 +362,7 @@ import {
 } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import Notify from "@/utils/notify.util";
 
 export default {
   name: "App",
@@ -352,7 +371,8 @@ export default {
     MoleculeRouletteWheel,
     OrganismTopBar,
     MoleculeAlertSpinResult,
-    OrganismBettingsHistory
+    OrganismBettingsHistory,
+    AtomSpin
   },
   data() {
     return {
@@ -376,6 +396,7 @@ export default {
       ballLandingNumber: 0,
       alertMessageVisible: false,
       CHIP_NUMBER,
+      betPending: false,
     };
   },
   computed: {
@@ -386,8 +407,9 @@ export default {
       history: (state) => state.roulette.history || {},
       bettings: (state) => state.user.bettings || [],
       betting: (state) => state.roulette.betting || {},
-      spined: (state) => state.roulette.spin || false,
-      rouletteNumber: (state) => state.roulette.number || 0,
+      spined: (state) => state.roulette.spin.loading || false,
+      current: (state) => state.roulette.spin.id || false,
+      rouletteNumber: (state) => state.roulette.spin.number || 0,
     }),
     ...mapGetters({
       betSum: "roulette/getBetSum",
@@ -396,7 +418,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      handleReset: "roulette/RESET_ROULETTE",
+      handleReset: "roulette/RESET_ROULETTE_SPIN",
       updateBetting: "roulette/UPDATE_BETTING",
     }),
     ...mapActions({
@@ -455,6 +477,31 @@ export default {
         ...this.betting,
         [index]: !this.betting[index],
       });
+    },
+    handleBetSet() {
+      if (this.betSum == 0) return (this.alerBets = true);
+
+      this.betPending = true;
+      setTimeout(async () => {
+        try {
+          await this.$http.post(
+            `/users/${this.$route.params.userId}/bettings`,
+            {
+              spin: this.current,
+              bet_layout: [],
+            }
+          );
+          Notify.success(this.$notify, {
+            title: "Bet successfully!",
+            message:
+              "Your bet request has been submitted. It might take some time for changes to appear.",
+          });
+        } catch (error) {
+          Notify.error(this.$notify, error);
+        } finally {
+          this.betPending = false;
+        }
+      }, 100);
     },
   },
   mounted() {

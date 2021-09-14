@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      handleReset: "roulette/RESET_ROULETTE",
+      handleReset: "roulette/RESET_ROULETTE_SPIN",
     }),
   },
 };

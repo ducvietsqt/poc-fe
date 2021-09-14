@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetRoulette: "roulette/RESET_ROULETTE",
+      resetRoulette: "roulette/RESET_ROULETTE_SPIN",
     }),
     ...mapActions({
       fetchUserList: "user/list",
