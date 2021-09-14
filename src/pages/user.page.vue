@@ -1,6 +1,6 @@
 <template>
   <div class="roulette-table">
-    <OrganismTopBar :account="account" :list="userList" />
+    <OrganismTopBar :account="account" :user="detail" :list="userList" />
     <MoleculeRouletteWheel :spin="spined" :rouletteNumber="rouletteNumber" />
     <div class="betting-area" style="width: 1084px; height: 407.2px">
       <div class="top-area">
@@ -304,9 +304,9 @@
         </div>
       </div>
     </div>
-    <OrganismBettingsHistory class="pt-5 pb-32" :bettings="bettings" />
+    <OrganismBettingsHistory class="pt-5 pb-32" :bettings="detail.bettings" />
 
-    <div class="money-container fixed bottom-0">
+    <div class="money-container fixed bottom-0 z-50">
       <div class="cash-area area">
         <div class="text"><span>BALANCE</span> $</div>
         <div class="cash-total"></div>
@@ -407,7 +407,7 @@ export default {
       userList: (state) => state.user.list || "",
       balance: (state) => state.wallet.balance || false,
       history: (state) => state.roulette.history || {},
-      bettings: (state) => state.user.bettings || [],
+      detail: (state) => state.user.detail || {},
       betting: (state) => state.roulette.betting || {},
       spined: (state) => state.roulette.spin.loading || false,
       current: (state) => state.roulette.spin.id || false,
@@ -530,6 +530,13 @@ export default {
     background: #00ad00;
     color: #fff;
     font-weight: 700;
+  }
+  .ant-table-placeholder {
+    background: #00ad00;
+    border-bottom: none;
+    .ant-empty-description {
+      color: white;
+    }
   }
 }
 </style>

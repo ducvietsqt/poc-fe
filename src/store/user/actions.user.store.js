@@ -18,7 +18,8 @@ export default {
             const results = await http.get(`/users/${userId}/bettings`)
             console.log(`results:>>`, results)
             commit(UPDATE_USER_DETAIL, {
-                bettings: results.data
+                bettings: results.data,
+                id: userId
             })
         } catch (error) {
             console.log(`error:>>`, error)

@@ -1,8 +1,9 @@
 <template>
   <div
-    class="alert-message-container alert-spin-result"
+    class="alert-message-container alert-spin-result "
     :class="{
       'alert-message-visible': spined,
+      'delay-5000 ease-in-out': spined
     }"
     @click="handleReset"
   >

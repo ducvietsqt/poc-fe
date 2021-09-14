@@ -16,7 +16,11 @@ module.exports = {
       red: colors.red,
       gold: "#f7b02e",
     },
-    extend: {},
+    extend: {
+      transitionDelay: {
+        '5000': '5000ms',
+       }
+    },
   },
   variants: {
     extend: {
