@@ -341,7 +341,6 @@ import {
   RED_NUMBERS,
   BLACK_NUMBERS,
   CHIP_NUMBER,
-  BETTING,
 } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
@@ -353,7 +352,7 @@ export default {
     MoleculeRouletteWheel,
     OrganismTopBar,
     MoleculeAlertSpinResult,
-    OrganismBettingsHistory,
+    OrganismBettingsHistory
   },
   data() {
     return {
@@ -372,7 +371,6 @@ export default {
       columnBlackHover: false,
       alerBets: false,
       alerMoney: false,
-      betting: Object.assign({}, BETTING),
       NUMBERS,
       rouletteNumbersAmount: 37,
       ballLandingNumber: 0,
@@ -387,6 +385,7 @@ export default {
       balance: (state) => state.wallet.balance || false,
       history: (state) => state.roulette.history || {},
       bettings: (state) => state.user.bettings || [],
+      betting: (state) => state.roulette.betting || {},
       spined: (state) => state.roulette.spin || false,
       rouletteNumber: (state) => state.roulette.number || 0,
     }),
@@ -452,7 +451,10 @@ export default {
     handleBet(index) {
       // if (this.balance < this.betSum + CHIP_NUMBER)
       //   return (this.alerMoney = true);
-      this.betting[index] = !this.betting[index];
+      this.updateBetting({
+        ...this.betting,
+        [index]: !this.betting[index],
+      });
     },
   },
   mounted() {

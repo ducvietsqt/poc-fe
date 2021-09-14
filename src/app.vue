@@ -22,6 +22,9 @@ export default {
     AtomNotify,
     MoleculeModalLogout,
   },
+  created() {
+    this.resetRoulette();
+  },
   computed: {
     ...mapState({
       account: (state) => state.wallet.provider?.address || "",
@@ -29,7 +32,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      handleReset: "roulette/RESET_ROULETTE",
+      resetRoulette: "roulette/RESET_ROULETTE",
     }),
     ...mapActions({
       fetchUserList: "user/list",
