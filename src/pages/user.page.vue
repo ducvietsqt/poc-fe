@@ -32,8 +32,9 @@
               >
                 <div
                   class="
-                    w-10/12
+                    w-9/12
                     h-1/3
+                    xl:w-8/12
                     border-4
                     rounded-full
                     flex
