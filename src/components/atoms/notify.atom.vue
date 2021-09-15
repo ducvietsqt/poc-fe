@@ -12,8 +12,8 @@
           border-solid border
           rounded-2xl
           shadow-lg
-          border-purple
-          bg-white
+          border-gold
+          bg-black
         "
       >
         <div class="flex">
@@ -26,11 +26,11 @@
             class="w-6 h-6 flex-none text-red-500"
           />
           <div class="ml-4 font-thin">
-            <a class="text-gray-9 text-base"> {{ props.item.title }} </a>
-            <div class="text-gray-9 text-sm break-word" v-html="props.item.text"></div>
+            <a class="text-gray-50 text-base"> {{ props.item.title }} </a>
+            <div class="text-gray-100 text-sm break-word" v-html="props.item.text"></div>
           </div>
         </div>
-        <a @click="props.close" class="text-gray-7 text-sm cursor-pointer">
+        <a @click="props.close" class="text-gray-50 text-sm cursor-pointer">
           <AtomCloseIcon />
         </a>
       </div>

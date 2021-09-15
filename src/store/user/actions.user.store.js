@@ -12,14 +12,14 @@ export default {
             console.log(`error:>>`, error)
         }
     },
-    async detail({ commit }, { userId }) {
+    async detail({ commit }, { userId, address }) {
         try {
-            console.log(`userId:>>`, userId)
             const results = await http.get(`/users/${userId}/bettings`)
-            console.log(`results:>>`, results)
+            console.log(`action:>>detail:>>results:>>`, results.data)
             commit(UPDATE_USER_DETAIL, {
-                bettings: results.data,
-                id: userId
+                history: results.data.items,
+                id: userId,
+                address: address,
             })
         } catch (error) {
             console.log(`error:>>`, error)
