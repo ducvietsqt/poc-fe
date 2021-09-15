@@ -45,11 +45,4 @@ export default {
 </script>
 
 <style lang="less">
-#app {
-  .ant-table-thead > tr > th {
-    background: #00ad00;
-    color: #fff;
-    font-weight: 700;
-  }
-}
 </style>

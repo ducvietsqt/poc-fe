@@ -147,7 +147,10 @@
         </div>
       </div>
     </div>
-    <OrganismBettingsHistory class="pt-5 pb-32" :bettings="detail.history" />
+    <OrganismBettingsHistory
+      class="mt-5 shadow-inner border-gold border-t"
+      :bettings="detail.history"
+    />
 
     <!-- Alert messages start ---------------------------------------------------------------->
     <div
@@ -302,18 +305,4 @@ export default {
 </script>
 
 <style lang="less">
-#app {
-  .ant-table-thead > tr > th {
-    background: #00ad00;
-    color: #fff;
-    font-weight: 700;
-  }
-  .ant-table-placeholder {
-    background: #00ad00;
-    border-bottom: none;
-    .ant-empty-description {
-      color: white;
-    }
-  }
-}
 </style>
