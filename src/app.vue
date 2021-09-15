@@ -13,7 +13,7 @@
 import MixinMetamaskConnect from "@/mixins/metamask-connect.mixin";
 import AtomNotify from "@/components/atoms/notify.atom";
 import MoleculeModalLogout from "@/components/molecules/modals/logout.modal.molecule";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "App",
@@ -23,7 +23,9 @@ export default {
     MoleculeModalLogout,
   },
   created() {
+    console.log(`created:>>created`)
     this.resetRoulette();
+    this.resetUser();
   },
   computed: {
     ...mapState({
@@ -33,13 +35,8 @@ export default {
   methods: {
     ...mapMutations({
       resetRoulette: "roulette/RESET_ROULETTE_SPIN",
+      resetUser: "user/RESET_USER",
     }),
-    ...mapActions({
-      fetchUserList: "user/list",
-    }),
-  },
-  mounted() {
-    this.fetchUserList();
   },
 };
 </script>

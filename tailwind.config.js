@@ -20,13 +20,16 @@ module.exports = {
       },
       transitionDuration: {
         '2000': '2000ms',
-      }
+      },
     },
   },
   variants: {
     extend: {
       opacity: ['disabled', 'hover'],
+      pointerEvents: ['disabled'],
+      margin: ['disabled'],
       cursor: ['disabled'],
+      transform: ['hover'],
     },
   },
   plugins: [],

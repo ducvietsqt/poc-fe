@@ -2,33 +2,33 @@
   <div
     class="roulette-wheel-container"
     :class="{
-      'z-index-visible': spin,
-      'roulette-wheel-visible': spin,
+      'z-index-visible': spin.loading,
+      'roulette-wheel-visible': spin.loading,
     }"
   >
     <div class="roulette-wheel">
       <div
         class="roulette-wheel-main roulette-image"
         :class="{
-          'roulette-wheel-spin': spin,
+          'roulette-wheel-spin': spin.loading,
         }"
       ></div>
       <div class="roulette-center roulette-image"></div>
       <div
         class="roulette-cross-shadow roulette-image"
         :class="{
-          'roulette-wheel-spin': spin,
+          'roulette-wheel-spin': spin.loading,
         }"
       ></div>
       <div
         class="roulette-cross roulette-image"
         :class="{
-          'roulette-wheel-spin': spin,
+          'roulette-wheel-spin': spin.loading,
         }"
       >
         <div class="number-glow-container"></div>
       </div>
-      <div class="ball-container" :key="rouletteNumber">
+      <div class="ball-container" :key="spin.number">
         <div class="ball-spinner">
           <div class="ball"></div>
         </div>
@@ -46,21 +46,13 @@ export default {
   name: "molecule-roulette-wheel",
   props: {
     spin: {
-      type: Boolean,
-    },
-    rouletteNumber: {
-      type: Number,
+      type: Object,
     },
   },
   watch: {
-    rouletteNumber() {
+    spin() {
       this.rouletteWheelAnimation();
     },
-  },
-  data() {
-    return {
-      random: 0,
-    };
   },
   methods: {
     calcBallLandingNumber() {

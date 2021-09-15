@@ -1,8 +1,9 @@
 export default () => ({
   list: [],
   detail: {
-    id: 1,
+    id: null,
     address: "",
-    history: []
-  }
+    betting: []
+  },
+  history: {}
 });

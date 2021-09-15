@@ -1,7 +1,4 @@
 import { UPDATE_ROULETTE_SPIN, RESET_ROULETTE_SPIN } from './constants.roulette.store'
-import {
-    BETTING,
-} from "@/constants/roulette.constant";
 
 export default {
     [UPDATE_ROULETTE_SPIN](state, payload) {
@@ -9,8 +6,7 @@ export default {
     },
     [RESET_ROULETTE_SPIN](state) {
         state.spin.loading = false
-        state.spin.number = 0
-        state.spin.id = 1
-        state.betting = Object.assign({}, BETTING)
+        state.spin.number = -1
+        state.spin.id = null
     },
 };

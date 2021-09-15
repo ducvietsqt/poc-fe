@@ -1,6 +1,7 @@
 export default () => ({
   spin: {
     loading: false,
-    number: 0,
+    number: -1,
+    id: null
   },
 });

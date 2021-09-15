@@ -1,7 +1,7 @@
 <template>
   <div class="roulette-table">
-    <OrganismTopBar :account="account" :user="detail" :list="userList" />
-    <MoleculeRouletteWheel :spin="spined" :rouletteNumber="rouletteNumber" />
+    <OrganismTopBar :user="detail" :list="list" />
+    <MoleculeRouletteWheel :spin="spin" />
     <div class="betting-area" style="width: 1084px; height: 407.2px">
       <div class="top-area">
         <div
@@ -10,6 +10,7 @@
             number0
             regular
             regular0
+            cursor-pointer
             part
             hover:bg-white hover:bg-opacity-50
           "
@@ -18,7 +19,12 @@
           <MoleculeChip v-if="betting.indexOf(0) != -1" />
         </div>
         <div
-          class="number number3 hover:bg-white hover:bg-opacity-50"
+          class="
+            number
+            number3
+            hover:bg-white hover:bg-opacity-50
+            cursor-pointer
+          "
           v-for="item in RENDER_NUMBERS"
           :key="item"
           @click="handleBet(item)"
@@ -112,8 +118,14 @@
         />
       </div>
       <div class="menu-container">
-        <div class="button button-spin" @click="handleBetSet">
-          <div class="circle" id="chip200">
+        <div class="button button-spin group" @click="handleBetSet">
+          <div
+            class="circle"
+            id="chip200"
+            :class="{
+              'group-hover:transform-none': betPending || spinPending,
+            }"
+          >
             <AtomSpin class="h-5 w-5 align-middle" v-if="betPending" />
             <div
               v-else
@@ -129,27 +141,44 @@
           <div class="circle-overlay"></div>
           <div class="button-text">BET</div>
         </div>
-        <div class="button button-spin" @click="handleSpin">
+        <button
+          class="
+            button button-spin
+            disabled:pointer-events-none
+            disabled:opacity-50
+          "
+          :disabled="betPending || spinPending"
+          @click="handleSpin"
+        >
           <div class="circle">
             <AtomSpin class="h-5 w-5 align-middle" v-if="spinPending" />
             <i class="fas fa-play icon" v-else></i>
           </div>
           <div class="circle-overlay"></div>
           <div class="button-text">SPIN</div>
-        </div>
-        <div class="button button-reset" @click="handleReset">
+        </button>
+        <button
+          class="
+            button button-reset
+            disabled:pointer-events-none
+            disabled:opacity-50
+          "
+          :disabled="betPending || spinPending"
+          @click="handleReset"
+        >
           <div class="circle">
             <i class="fas fa-plus icon"></i>
           </div>
           <div class="circle-overlay"></div>
 
           <div class="button-text">RESET</div>
-        </div>
+        </button>
       </div>
     </div>
     <OrganismBettingsHistory
       class="mt-5 shadow-inner border-gold border-t"
-      :bettings="detail.history"
+      :userId="$route.params.userId"
+      :history="history"
     />
 
     <!-- Alert messages start ---------------------------------------------------------------->
@@ -163,11 +192,7 @@
       <div class="alert-message">PLEASE PLACE YOUR BETS</div>
     </div>
 
-    <MoleculeAlertSpinResult
-      :spined="spined"
-      :rouletteNumber="rouletteNumber"
-      :win="win"
-    />
+    <MoleculeAlertSpinResult :spin="spin" :betting="betting" />
     <!-- Alert messages end ---------------------------------------------------------------->
   </div>
 </template>
@@ -182,7 +207,7 @@ import OrganismBettingsHistory from "@/components/organisms/bettings-history.org
 import AtomSpin from "@/components/atoms/icons/spin.icon.atom";
 import { RENDER_NUMBERS } from "@/constants/roulette.constant";
 
-import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import Notify from "@/utils/notify.util";
 
 export default {
@@ -200,9 +225,6 @@ export default {
     return {
       RENDER_NUMBERS,
       alerBets: false,
-      rouletteNumbersAmount: 37,
-      ballLandingNumber: 0,
-      alertMessageVisible: false,
       betting: [],
       betPending: false,
       spinPending: false,
@@ -215,26 +237,21 @@ export default {
   },
   computed: {
     ...mapState({
-      account: (state) => state.wallet.provider?.address || "",
-      userList: (state) => state.user.list || "",
-      history: (state) => state.roulette.history || {},
+      list: (state) => state.user.list || [],
       detail: (state) => state.user.detail || {},
-      spined: (state) => state.roulette.spin.loading || false,
-      current: (state) => state.roulette.spin.id || false,
-      rouletteNumber: (state) => state.roulette.spin.number || 0,
-    }),
-    ...mapGetters({
-      win: "roulette/win",
+      history: (state) => state.user.history || {},
+      spin: (state) => state.roulette.spin || {},
     }),
   },
   methods: {
     ...mapMutations({
-      updateBetting: "roulette/UPDATE_BETTING",
+      updateRouletteSpin: "roulette/UPDATE_ROULETTE_SPIN",
+      updateUserList: "user/UPDATE_USER_LIST",
       updateUserDetail: "user/UPDATE_USER_DETAIL",
+      updateUserHistory: "user/UPDATE_USER_HISTORY",
     }),
     ...mapActions({
-      spin: "roulette/spin",
-      fetchUserList: "user/list",
+      spinRoulette: "roulette/spin",
       fetchUserDetail: "user/detail",
     }),
     handleReset() {
@@ -244,7 +261,7 @@ export default {
       this.spinPending = true;
       setTimeout(async () => {
         try {
-          await this.spin();
+          await this.spinRoulette();
           await this.fetchUserDetail({
             userId: this.$route.params.userId || 1,
           });
@@ -269,14 +286,18 @@ export default {
           await this.$http.post(
             `/users/${this.$route.params.userId}/bettings`,
             {
-              spin: this.current,
+              spin: this.spin.id,
               bet_layout: this.betting,
             }
           );
-          this.fetchUserDetail({
-            userId: this.detail.id,
-            spin: this.current,
-            address: this.detail.address,
+          const result = await this.$http.get(
+            `/users/${this.$route.params.userId}/bettings`
+          );
+          const betting = result.data.items.find(
+            (item) => item.bet_spin === this.spin.id
+          );
+          this.updateUserDetail({
+            betting: betting ? betting.bet_layout : [],
           });
           Notify.success(this.$notify, {
             title: "Bet successfully!",
@@ -291,15 +312,29 @@ export default {
       }, 100);
     },
   },
-  mounted() {
-    const user = this.userList.find(
-      (item) => item.id == this.$route.params.userId
-    );
-    this.fetchUserDetail({
-      userId: this.$route.params.userId || 1,
-      spin: this.current,
-      address: user ? user.address : "",
-    });
+  async mounted() {
+    try {
+      const { data: list } = await this.$http.get("/users");
+      const user = list.find((item) => item.id == this.$route.params.userId);
+      const { data: spin } = await this.$http.get("/spins");
+      const result = await this.$http.get(`/users/${user.id}/bettings`);
+
+      const betting = result.data.items.find((item) => item.bet_spin === spin);
+
+      this.updateRouletteSpin({
+        id: spin,
+      });
+      this.updateUserList({
+        list: list,
+      });
+      this.updateUserDetail({
+        ...user,
+        betting: betting ? betting.bet_layout : [],
+      });
+      this.updateUserHistory(result.data);
+    } catch (error) {
+      console.log(`user:>>mounted:>>`, error);
+    }
   },
 };
 </script>

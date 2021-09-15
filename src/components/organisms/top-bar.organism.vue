@@ -30,20 +30,20 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 import { EXPLORER_URL } from "@/env";
 
 export default {
   name: "organism-top-bar",
   props: {
-    account: {
-      type: String,
-    },
     user: {
       type: Object,
     },
     list: {
       type: Array,
+    },
+    spin: {
+      type: Object,
     },
   },
   computed: {
@@ -60,16 +60,26 @@ export default {
   methods: {
     ...mapMutations({
       resetRoulette: "roulette/RESET_ROULETTE_SPIN",
-    }),
-    ...mapActions({
-      fetchUserDetail: "user/detail",
+      updateUserDetail: "user/UPDATE_USER_DETAIL",
+      updateUserHistory: "user/UPDATE_USER_HISTORY",
     }),
     async handleUserClick(item) {
-      this.resetRoulette();
-      await this.fetchUserDetail({
-        userId: item.id,
-      });
-      this.$router.push(`/user/${item.id}`);
+      try {
+        this.resetRoulette();
+        const result = await this.$http.get(`/users/${item.id}/bettings`);
+        const betting = result.data.items.find(
+          (item) => item.bet_spin === this.spin.id
+        );
+        this.updateUserDetail({
+          ...item,
+          betting: betting ? betting.bet_layout : [],
+        });
+        this.updateUserHistory(result.data);
+
+        this.$router.push(`/user/${item.id}`);
+      } catch (error) {
+        console.log(`handleUserClick:>>eror`, error)
+      }
     },
   },
 };

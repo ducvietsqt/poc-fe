@@ -1,7 +1,20 @@
 <template>
   <div class="w-full px-20 py-10 history">
-    <h1 class="text-gold text-4xl">HISTORY</h1>
-    <a-table class="text-white" :columns="columns" :data-source="bettings">
+    <h1 class="text-gold text-4xl" style="text-shadow: 2px 2px 4px #b14700">
+      HISTORY
+    </h1>
+    <a-table
+      class="text-white"
+      :columns="columns"
+      :loading="loading"
+      :data-source="history.items"
+      @change="handlePageChange"
+      :pagination="{
+        pageSize: history.limit,
+        current: current,
+        total: history.total,
+      }"
+    >
       <span slot="content" slot-scope="text" class="text-white">{{
         text
       }}</span>
@@ -9,15 +22,21 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "organism-betting-area",
   props: {
-    bettings: {
-      type: Array,
+    history: {
+      type: Object,
+    },
+    userId: {
+      type: [Number, String],
     },
   },
   data() {
     return {
+      loading: this.userId ? false : true,
       columns: [
         {
           title: "Spin",
@@ -56,17 +75,36 @@ export default {
           scopedSlots: { customRender: "content" },
         },
       ],
+      current: Math.ceil(this.history.offset / this.history.limit) + 1,
     };
+  },
+  methods: {
+    ...mapMutations({
+      updateHistory: "user/UPDATE_USER_HISTORY",
+    }),
+    handlePageChange(pagination) {
+      console.log(`handlePageChange:>>pagination:>>`, pagination);
+      this.loading = true;
+      setTimeout(async () => {
+        try {
+          const results = await this.$http.get(`/users/${this.userId}/bettings`);
+          this.updateHistory(results.data);
+        } catch (error) {
+          console.log(`handlePageChange:>>`, error);
+        } finally {
+          this.loading = false;
+        }
+      }, 100);
+    },
   },
 };
 </script>
 <style lang="less">
 .history {
-  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-  background: linear-gradient(to bottom, #252525 0%, #585858 100%);
+  background-color: #202020;
   .ant-table-thead > tr > th {
     @apply text-gold;
-    background: linear-gradient(to bottom, #252525 0%, #585858 100%);
+    background-color: #202020;
     font-weight: 700;
   }
   .ant-table-placeholder {
@@ -92,14 +130,27 @@ export default {
   }
   .ant-pagination-item-active {
     @apply border-gold;
+    background-color: #202020;
   }
   .ant-pagination-item-active a {
     @apply text-gold;
   }
-  .ant-pagination-disabled a, .ant-pagination-disabled:hover a, .ant-pagination-disabled:focus a, .ant-pagination-disabled .ant-pagination-item-link, .ant-pagination-disabled:hover .ant-pagination-item-link, .ant-pagination-disabled:focus .ant-pagination-item-link {
+  .ant-pagination-disabled a,
+  .ant-pagination-disabled:hover a,
+  .ant-pagination-disabled:focus a,
+  .ant-pagination-disabled .ant-pagination-item-link,
+  .ant-pagination-disabled:hover .ant-pagination-item-link,
+  .ant-pagination-disabled:focus .ant-pagination-item-link {
     display: flex;
     justify-content: center;
+    @apply opacity-10;
     align-items: center;
+  }
+
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    background-color: black;
+    color: #fff;
   }
 }
 </style>
