@@ -306,17 +306,6 @@
     </div>
     <OrganismBettingsHistory class="pt-5 pb-32" :bettings="detail.bettings" />
 
-    <div class="money-container fixed bottom-0 z-50">
-      <div class="cash-area area">
-        <div class="text"><span>BALANCE</span> $</div>
-        <div class="cash-total"></div>
-      </div>
-      <div class="bet-area area">
-        <div class="text"><span>BET</span> $</div>
-        <div class="bet-total">{{ betSum | toCurrency(2) }}</div>
-      </div>
-    </div>
-
     <!-- Alert messages start ---------------------------------------------------------------->
     <div
       class="alert-message-container alert-bets"
@@ -416,6 +405,7 @@ export default {
     ...mapGetters({
       betSum: "roulette/getBetSum",
       win: "roulette/win",
+      betLayout: "roulette/betLayout",
     }),
   },
   methods: {
@@ -475,6 +465,9 @@ export default {
       setTimeout(async () => {
         try {
           await this.spin();
+          await this.fetchUserDetail({
+            userId: this.$route.params.userId || 1,
+          });
         } catch (error) {
           Notify.error(this.$notify, error);
         } finally {
@@ -493,6 +486,7 @@ export default {
     handleBetSet() {
       if (this.betSum == 0) return (this.alerBets = true);
 
+      console.log(`betLayout:>>`, this.betLayout);
       this.betPending = true;
       setTimeout(async () => {
         try {

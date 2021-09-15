@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700&display=swap");
+
 *,
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
@@ -14,7 +15,7 @@
 img {
   display: block;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 h1,
@@ -79,15 +80,15 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -96,18 +97,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   /* height: 100vh; */
   width: 100vw;
   background-color: #00ad00;
@@ -119,23 +120,23 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 100%;
   height: 5rem;
   background-color: #202020;
   color: white;
   padding: 0 2rem;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
 }
 
 .roulette-table .top-bar .roulette-rolls-container {
@@ -144,18 +145,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   background: -webkit-gradient(linear, left top, left bottom, from(#252525), to(#585858));
   background: linear-gradient(to bottom, #252525 0%, #585858 100%);
   border-radius: 1rem;
@@ -166,11 +167,11 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 3rem;
   width: 3rem;
   border-right: 1px solid black;
@@ -192,9 +193,9 @@ div {
 .roulette-table .top-bar .roulette-rolls-container .roll-last {
   position: absolute;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   border-radius: 0 0.9rem 0.9rem 0;
   border-right: none;
   right: 0px;
@@ -204,7 +205,7 @@ div {
 .roulette-table .top-bar .game-name {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
   font-size: 4rem;
@@ -218,14 +219,14 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   font-size: 1.7rem;
   font-weight: 500;
 }
@@ -244,13 +245,13 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   opacity: 0;
   top: 50%;
   left: 50%;
@@ -264,7 +265,7 @@ div {
 
 .roulette-table .roulette-wheel-container .roulette-wheel {
   -webkit-transform: scale(0.01);
-          transform: scale(0.01);
+  transform: scale(0.01);
   width: 35vw;
   height: 35vw;
   -webkit-transition: 1s -webkit-transform ease;
@@ -288,7 +289,7 @@ div {
   transition: 1s transform ease;
   transition: 1s transform ease, 1s -webkit-transform ease;
   -webkit-filter: drop-shadow(3px 3px 20px black);
-          filter: drop-shadow(3px 3px 20px black);
+  filter: drop-shadow(3px 3px 20px black);
 }
 
 .roulette-table .roulette-wheel-container .roulette-wheel .roulette-center {
@@ -307,7 +308,7 @@ div {
 
 .roulette-table .roulette-wheel-container .roulette-wheel .roulette-wheel-spin {
   -webkit-animation: roulette-wheel-animation 5s forwards ease-out;
-          animation: roulette-wheel-animation 5s forwards ease-out;
+  animation: roulette-wheel-animation 5s forwards ease-out;
 }
 
 .roulette-table .roulette-wheel-container .roulette-wheel .number-glow-container {
@@ -331,15 +332,15 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
 }
@@ -349,18 +350,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   height: 63%;
   width: 10%;
   -webkit-animation: ball-container-animation 5s forwards ease-out;
-          animation: ball-container-animation 5s forwards ease-out;
+  animation: ball-container-animation 5s forwards ease-out;
 }
 
 .roulette-table .roulette-wheel-container .roulette-wheel .ball-container .ball-spinner .ball {
@@ -372,154 +373,184 @@ div {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   -webkit-animation: ball-animation 5s forwards ease-out;
-          animation: ball-animation 5s forwards ease-out;
+  animation: ball-animation 5s forwards ease-out;
 }
 
 @-webkit-keyframes roulette-wheel-animation {
   0% {
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes roulette-wheel-animation {
   0% {
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @-webkit-keyframes ball-animation {
   0% {
     -webkit-transform: translateY(-450%);
-            transform: translateY(-450%);
+    transform: translateY(-450%);
   }
+
   40% {
     -webkit-transform: translateY(-380%);
-            transform: translateY(-380%);
+    transform: translateY(-380%);
   }
+
   62% {
     -webkit-transform: translateY(-120%);
-            transform: translateY(-120%);
+    transform: translateY(-120%);
   }
+
   65% {
     -webkit-transform: translateY(-220%);
-            transform: translateY(-220%);
+    transform: translateY(-220%);
   }
+
   68% {
     -webkit-transform: translateY(-70%);
-            transform: translateY(-70%);
+    transform: translateY(-70%);
   }
+
   71% {
     -webkit-transform: translateY(-140%);
-            transform: translateY(-140%);
+    transform: translateY(-140%);
   }
+
   74% {
     -webkit-transform: translateY(-40%);
-            transform: translateY(-40%);
+    transform: translateY(-40%);
   }
+
   77% {
     -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
+    transform: translateY(-100%);
   }
+
   80% {
     -webkit-transform: translateY(-25%);
-            transform: translateY(-25%);
+    transform: translateY(-25%);
   }
+
   83% {
     -webkit-transform: translateY(-60%);
-            transform: translateY(-60%);
+    transform: translateY(-60%);
   }
+
   86% {
     -webkit-transform: translateY(65%);
-            transform: translateY(65%);
+    transform: translateY(65%);
   }
+
   89% {
     -webkit-transform: translateY(10%);
-            transform: translateY(10%);
+    transform: translateY(10%);
   }
+
   92% {
     -webkit-transform: translateY(65%);
-            transform: translateY(65%);
+    transform: translateY(65%);
   }
+
   95% {
     -webkit-transform: translateY(30%);
-            transform: translateY(30%);
+    transform: translateY(30%);
   }
+
   100% {
     -webkit-transform: translateY(40%);
-            transform: translateY(40%);
+    transform: translateY(40%);
   }
 }
 
 @keyframes ball-animation {
   0% {
     -webkit-transform: translateY(-450%);
-            transform: translateY(-450%);
+    transform: translateY(-450%);
   }
+
   40% {
     -webkit-transform: translateY(-380%);
-            transform: translateY(-380%);
+    transform: translateY(-380%);
   }
+
   62% {
     -webkit-transform: translateY(-120%);
-            transform: translateY(-120%);
+    transform: translateY(-120%);
   }
+
   65% {
     -webkit-transform: translateY(-220%);
-            transform: translateY(-220%);
+    transform: translateY(-220%);
   }
+
   68% {
     -webkit-transform: translateY(-70%);
-            transform: translateY(-70%);
+    transform: translateY(-70%);
   }
+
   71% {
     -webkit-transform: translateY(-140%);
-            transform: translateY(-140%);
+    transform: translateY(-140%);
   }
+
   74% {
     -webkit-transform: translateY(-40%);
-            transform: translateY(-40%);
+    transform: translateY(-40%);
   }
+
   77% {
     -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
+    transform: translateY(-100%);
   }
+
   80% {
     -webkit-transform: translateY(-25%);
-            transform: translateY(-25%);
+    transform: translateY(-25%);
   }
+
   83% {
     -webkit-transform: translateY(-60%);
-            transform: translateY(-60%);
+    transform: translateY(-60%);
   }
+
   86% {
     -webkit-transform: translateY(65%);
-            transform: translateY(65%);
+    transform: translateY(65%);
   }
+
   89% {
     -webkit-transform: translateY(10%);
-            transform: translateY(10%);
+    transform: translateY(10%);
   }
+
   92% {
     -webkit-transform: translateY(65%);
-            transform: translateY(65%);
+    transform: translateY(65%);
   }
+
   95% {
     -webkit-transform: translateY(30%);
-            transform: translateY(30%);
+    transform: translateY(30%);
   }
+
   100% {
     -webkit-transform: translateY(40%);
-            transform: translateY(40%);
+    transform: translateY(40%);
   }
 }
 
@@ -529,7 +560,7 @@ div {
 
 .roulette-table .roulette-wheel-visible .roulette-wheel {
   -webkit-transform: scale(1) !important;
-          transform: scale(1) !important;
+  transform: scale(1) !important;
 }
 
 .roulette-table .z-index-visible {
@@ -542,18 +573,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   background-image: url(../images/roulette-table.png);
   background-position: center;
   background-size: 100% 100%;
@@ -563,7 +594,7 @@ div {
 .roulette-table .betting-area .betting-chip {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
 }
@@ -574,20 +605,20 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 100%;
   height: 63.9%;
 }
@@ -611,19 +642,19 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   top: 0em;
   right: 6.8%;
   height: 104%;
@@ -669,16 +700,16 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 83.5%;
   height: 36.1%;
   margin-left: 9.6%;
@@ -716,18 +747,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-left: 2rem;
 }
 
 .betting-chips-container .betting-chip {
   position: relative;
   -webkit-transform: translate(0, 0);
-          transform: translate(0, 0);
+  transform: translate(0, 0);
   left: 0;
   top: 0;
   width: 7rem;
@@ -735,7 +766,7 @@ div {
   margin-right: 1.5rem;
   font-size: 1.8rem;
   -webkit-filter: drop-shadow(0 3px 10px #6e6e6e);
-          filter: drop-shadow(0 3px 10px #6e6e6e);
+  filter: drop-shadow(0 3px 10px #6e6e6e);
   border: 4px solid rgba(255, 255, 255, 0);
 }
 
@@ -744,11 +775,11 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 3rem;
   height: 3rem;
   background-position: center;
@@ -789,7 +820,7 @@ div {
 
 .betting-chip-shadow {
   -webkit-filter: drop-shadow(3px 3px 5px #424242);
-          filter: drop-shadow(3px 3px 5px #424242);
+  filter: drop-shadow(3px 3px 5px #424242);
 }
 
 .white-area {
@@ -798,10 +829,10 @@ div {
 
 .active-chip {
   -webkit-filter: drop-shadow(0 3px 10px white) !important;
-          filter: drop-shadow(0 3px 10px white) !important;
+  filter: drop-shadow(0 3px 10px white) !important;
   border: 4px solid white !important;
   -webkit-transform: scale(1.1) !important;
-          transform: scale(1.1) !important;
+  transform: scale(1.1) !important;
 }
 
 .selections-container {
@@ -809,14 +840,14 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -826,20 +857,20 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   height: 4rem;
   background-color: #2c3a4d;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   border-radius: 3rem 0 0 3rem;
   border-right: none;
   padding-left: 2rem;
@@ -851,18 +882,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-right: 2rem;
   -webkit-transform: translateY(-8%);
-          transform: translateY(-8%);
+  transform: translateY(-8%);
   cursor: pointer;
 }
 
@@ -871,11 +902,11 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 7rem;
   width: 7rem;
   border-radius: 4rem;
@@ -883,9 +914,9 @@ div {
   color: var(--global-gold-color);
   color: white;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   font-size: 2rem;
   -webkit-transition: 0.2s all ease;
   transition: 0.2s all ease;
@@ -893,7 +924,7 @@ div {
 
 .menu-container .button .circle .icon {
   -webkit-filter: drop-shadow(0 0 1px #995f1d);
-          filter: drop-shadow(0 0 1px #995f1d);
+  filter: drop-shadow(0 0 1px #995f1d);
 }
 
 .menu-container .button .circle .cross-line {
@@ -903,7 +934,7 @@ div {
   height: 100%;
   background-color: var(--global-gold-color);
   -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .menu-container .button .circle .cross-line-display {
@@ -913,7 +944,7 @@ div {
 .menu-container .button .circle-overlay {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
   width: 100%;
@@ -924,7 +955,7 @@ div {
 .menu-container .button .button-text {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 110%;
   left: 50%;
   font-size: 1.3rem;
@@ -934,16 +965,16 @@ div {
   color: var(--global-gold-color);
   color: white;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   border-radius: 0.5rem;
   z-index: 1;
 }
 
 .menu-container .button-reset .icon {
   -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
   font-size: 2.7rem;
 }
 
@@ -953,25 +984,25 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   width: 100%;
   height: 5rem;
   background-color: black;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   padding: 0 2rem;
 }
 
@@ -980,14 +1011,14 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   color: white;
   font-size: 2rem;
   font-weight: 500;
@@ -1003,18 +1034,18 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   z-index: -1;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .alert-message-container .alert-message {
@@ -1022,11 +1053,11 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   text-align: center;
   background-color: black;
   padding: 3rem 5rem;
@@ -1035,33 +1066,32 @@ div {
   color: var(--global-gold-color);
   border-radius: 1rem;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
 }
 
 .alert-spin-result {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+
+  justify-content: center;
 }
 
 .alert-spin-result .results {
-  margin-right: 10%;
+  /* margin-right: 10%; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   background-color: black;
   padding: 1rem 1rem;
   font-size: 2rem;
@@ -1069,11 +1099,11 @@ div {
   color: white;
   border-radius: 1rem;
   border: 3px solid var(--global-gold-color);
-  width: 15rem;
-  height: 20rem;
+  width: 25rem;
+  height: 25rem;
   opacity: 0;
-  -webkit-transition: 0.75s opacity ease;
-  transition: 0.75s opacity ease;
+  /* -webkit-transition: 2s opacity ease; */
+  /* transition: 2s opacity ease; */
 }
 
 .alert-spin-result .results .text {
@@ -1081,11 +1111,11 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -1113,15 +1143,15 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .alert-game-over .alert-message .text {
@@ -1134,23 +1164,23 @@ div {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   width: 100%;
 }
 
 .alert-game-over .alert-message .answers .answer {
   padding: 1rem 2rem;
   -webkit-box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
-          box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
+  box-shadow: 0 0 0 2px #ffd900, 0 0 0 3px #383838, 0 0 0 6px #ff9100;
   -webkit-box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
-          box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
+  box-shadow: 0 0 0 4px var(--global-gold-color), 0 0 0 5px #837a69;
   border-radius: 1rem;
   -webkit-transition: 0.3s all ease;
   transition: 0.3s all ease;
@@ -1168,12 +1198,14 @@ div {
 @media only screen and (min-width: 1025px) {
   .betting-chip-menu:hover {
     -webkit-transform: scale(1.1) !important;
-            transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
   }
+
   .button:hover .circle {
     -webkit-transform: scale(1.1) !important;
-            transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
   }
+
   .answer:hover {
     background-color: var(--global-gold-color) !important;
     color: black !important;
@@ -1186,12 +1218,15 @@ div {
     height: 6rem;
     width: 6rem;
   }
+
   .roulette-table .selections-container .menu-container {
     padding-left: 1rem;
   }
+
   .roulette-table .selections-container .menu-container .button {
     margin: 0 0.5rem;
   }
+
   .roulette-table .selections-container .menu-container .button .circle {
     height: 6rem;
     width: 6rem;
@@ -1202,18 +1237,22 @@ div {
   .roulette-table .top-bar .game-name {
     font-size: 3rem;
   }
+
   .roulette-table .selections-container .betting-chips-container .betting-chip {
     margin: 0 0.2rem;
     height: 5.5rem;
     width: 5.5rem;
   }
+
   .roulette-table .selections-container .menu-container .button {
     margin: 0 0.5rem;
   }
+
   .roulette-table .selections-container .menu-container .button .circle {
     height: 5.5rem;
     width: 5.5rem;
   }
+
   .roulette-table .selections-container .menu-container .button .button-text {
     font-size: 1rem;
   }
@@ -1223,53 +1262,63 @@ div {
   .white-area {
     background-color: rgba(255, 255, 255, 0) !important;
   }
+
   .roulette-table .top-bar {
     padding: 0 1rem;
   }
+
   .roulette-table .top-bar .game-name {
     font-size: 3rem;
   }
+
   .roulette-table .top-bar .min-max-bet {
     font-size: 1.5rem;
   }
+
   .roulette-table .betting-area {
     -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
+    transform: rotate(90deg);
     height: 40%;
     width: 113%;
     z-index: 2;
   }
+
   .roulette-table .betting-area .betting-chip {
     -webkit-transform: translate(-50%, -50%) rotate(-90deg) !important;
-            transform: translate(-50%, -50%) rotate(-90deg) !important;
+    transform: translate(-50%, -50%) rotate(-90deg) !important;
   }
+
   .roulette-table .roulette-wheel-container {
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
   }
+
   .roulette-table .roulette-wheel-container .roulette-wheel {
     margin-top: 13%;
     top: 10%;
     width: 40rem;
     height: 40rem;
   }
+
   .roulette-table .alert-spin-result {
     -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
+
   .roulette-table .alert-spin-result .results {
     margin: 0;
     margin-bottom: 13%;
   }
+
   .roulette-table .selections-container {
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     height: 100%;
@@ -1277,57 +1326,63 @@ div {
     z-index: 1;
     padding: 0 6%;
   }
+
   .roulette-table .selections-container .betting-chips-container {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     height: auto;
     margin: 0;
   }
+
   .roulette-table .selections-container .betting-chips-container .betting-chip {
     -webkit-transform: translate(0, 0) !important;
-            transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
     margin: 0.3rem 0;
   }
+
   .roulette-table .selections-container .menu-container {
     -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     background-color: transparent;
     border: none;
     height: auto;
     width: auto;
   }
+
   .roulette-table .selections-container .menu-container .button {
     margin: 2rem 0;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
+
   .roulette-table .money-container {
     padding: 0 1rem;
   }
+
   .roulette-table .money-container .area {
     font-size: 1.5rem;
   }
@@ -1337,54 +1392,63 @@ div {
   .roulette-table .top-bar .roulette-rolls-container {
     border-radius: 0.75rem;
   }
+
   .roulette-table .top-bar .roulette-rolls-container .roll {
     height: 2.4rem;
     width: 2.4rem;
     font-size: 1.5rem;
   }
+
   .roulette-table .top-bar .game-name {
     font-size: 2.5rem;
   }
+
   .roulette-table .top-bar .min-max-bet {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
     font-size: 1.5rem;
   }
+
   .roulette-table .top-bar .min-max-bet .min-bet {
     margin: 0;
   }
+
   .roulette-table .betting-area {
     height: 38%;
     width: 108%;
   }
+
   .roulette-table .betting-area .betting-chip {
     height: 2.5rem;
     width: 2.5rem;
   }
+
   .roulette-table .roulette-wheel-container .roulette-wheel {
     margin-top: 3%;
     top: 10%;
     width: 35rem;
     height: 35rem;
   }
+
   .roulette-table .alert-spin-result .results {
     margin: 0;
     margin-bottom: 3%;
   }
+
   .alert-message-container .alert-message {
     max-width: 90%;
     padding: 3rem 3rem;
@@ -1394,40 +1458,44 @@ div {
 @media only screen and (max-width: 414px) {
   .roulette-table .top-bar {
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     height: 7rem;
     padding: 0.5rem 1rem;
     padding-top: 0;
   }
+
   .roulette-table .top-bar .roulette-rolls-container {
     -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
+    -ms-flex-order: 2;
+    order: 2;
     border-radius: 0.75rem;
   }
+
   .roulette-table .top-bar .roulette-rolls-container .roll {
     height: 2rem;
     width: 2rem;
     font-size: 1.2rem;
   }
+
   .roulette-table .top-bar .roulette-rolls-container .roll-last {
     border-radius: 0 0.8rem 0.8rem 0;
     width: 1.85rem;
   }
+
   .roulette-table .top-bar .game-name {
     -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
+    -ms-flex-order: 1;
+    order: 1;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     font-size: 2rem;
     top: 25%;
     width: 100%;
@@ -1436,79 +1504,96 @@ div {
     margin-bottom: 0.5rem;
     text-shadow: 1px 1px 2px #b14700;
   }
+
   .roulette-table .top-bar .min-max-bet {
     -webkit-box-ordinal-group: 4;
-        -ms-flex-order: 3;
-            order: 3;
+    -ms-flex-order: 3;
+    order: 3;
     font-size: 1.2rem;
   }
+
   .roulette-table .betting-area {
     height: 35%;
     width: 100%;
   }
+
   .roulette-table .betting-area .betting-chip {
     height: 1.7rem;
     width: 1.7rem;
     font-size: 0.8rem;
   }
+
   .roulette-table .roulette-wheel-container .roulette-wheel {
     margin-top: 7%;
     top: 10%;
     width: 22rem;
     height: 22rem;
   }
+
   .roulette-table .alert-spin-result .results {
     height: 16rem;
     width: 13rem;
     margin: 0;
     margin-bottom: 7%;
   }
+
   .roulette-table .alert-spin-result .results .text {
     font-size: 2rem;
   }
+
   .roulette-table .alert-spin-result .results .roll-number {
     padding: 0;
     font-size: 6rem;
     line-height: 5rem;
     margin-bottom: 0.5rem;
   }
+
   .roulette-table .selections-container {
     top: 55%;
     padding: 0 3.5%;
   }
+
   .roulette-table .selections-container .betting-chips-container .betting-chip {
     margin: 0.4rem 0;
     height: 3rem;
     width: 3rem;
     font-size: 1.2rem;
   }
+
   .roulette-table .selections-container .menu-container .button {
     margin: 0.5rem 0;
   }
+
   .roulette-table .selections-container .menu-container .button .circle {
     height: 3rem;
     width: 3rem;
     font-size: 1.3rem;
   }
+
   .roulette-table .selections-container .menu-container .button .button-text {
     font-size: 1rem;
     display: none;
   }
+
   .roulette-table .selections-container .menu-container .button-reset .circle .icon {
     font-size: 1.7rem;
   }
+
   .roulette-table .money-container {
     height: 3rem;
     padding: 0 1rem;
   }
+
   .roulette-table .money-container .area {
     font-size: 1.2rem;
   }
+
   .active-chip {
     -webkit-filter: drop-shadow(0 0px 3px white) !important;
-            filter: drop-shadow(0 0px 3px white) !important;
+    filter: drop-shadow(0 0px 3px white) !important;
     border: 2px solid white !important;
   }
+
   .alert-message-container .alert-message {
     padding: 2rem 1rem;
     font-size: 1.5rem;
@@ -1521,15 +1606,18 @@ div {
     width: 20rem;
     height: 20rem;
   }
+
   .roulette-table .alert-spin-result .results {
     height: 14rem;
     width: 12rem;
     margin: 0;
     margin-bottom: 5%;
   }
+
   .roulette-table .alert-spin-result .results .text {
     font-size: 1.5rem;
   }
+
   .roulette-table .alert-spin-result .results .roll-number {
     padding: 0;
     font-size: 5rem;
@@ -1542,48 +1630,60 @@ div {
   .roulette-table .top-bar {
     height: 6rem;
   }
+
   .roulette-table .top-bar .roulette-rolls-container {
     border-radius: 0.5rem;
   }
+
   .roulette-table .top-bar .roulette-rolls-container .roll {
     height: 1.5rem;
     width: 1.5rem;
     font-size: 1rem;
   }
+
   .roulette-table .top-bar .game-name {
     font-size: 1.5rem;
   }
+
   .roulette-table .top-bar .min-max-bet {
     font-size: 1rem;
   }
+
   .roulette-table .roulette-wheel-container .roulette-wheel {
     width: 18rem;
     height: 18rem;
   }
+
   .roulette-table .betting-area .betting-chip {
     height: 1.4rem;
     width: 1.4rem;
     font-size: 0.7rem;
   }
+
   .roulette-table .selections-container .betting-chips-container .betting-chip {
     margin: 0.3rem 0;
     height: 2.6rem;
     width: 2.6rem;
     font-size: 1rem;
   }
+
   .roulette-table .selections-container .menu-container .button .circle {
     height: 2.8rem;
     width: 2.8rem;
     font-size: 1.1rem;
   }
+
   .roulette-table .selections-container .menu-container .button-reset .circle .icon {
     font-size: 1.5rem;
   }
+
   .roulette-table .money-container {
     height: 2rem;
   }
+
   .roulette-table .money-container .area {
     font-size: 1rem;
   }
 }
+
 /*# sourceMappingURL=style.css.map */

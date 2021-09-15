@@ -19,7 +19,7 @@ export const ROULETTE_NUMBERS = [
 export const RENDER_NUMBERS = makeRenderNumbers()
 export const RED_NUMBERS = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
 export const BLACK_NUMBERS = [2, 4, 6, 8, 11, 10, 13, 15, 17, 20, 24, 22, 26, 28, 29, 31, 33, 35]
-export const CHIP_NUMBER = 5;
+export const CHIP_NUMBER = 1;
 
 export const BETTING = {
   [NUMBERS.ZERO]: false,

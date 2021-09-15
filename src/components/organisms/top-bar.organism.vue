@@ -16,29 +16,22 @@
     </div>
     <div class="game-name">ROULETTE</div>
     <div>
-      <button
-        v-if="!account"
+      <a
+        :href="`${EXPLORER_URL}/address/${address}`"
         class="roulette-rolls-container h-12 px-7 font-normal"
         style="font-size: 2rem"
-        @click="handleConnect"
+        target="_blank"
       >
-        <span class="font-light"> Connect </span>
-      </button>
-      <button
-        v-else
-        class="roulette-rolls-container h-12 px-7 font-normal"
-        style="font-size: 2rem"
-        @click="$modal.show('modal-logout')"
-      >
-        <span class="font-light">
-          {{ account | truncate(8, 4, 4) }}
+        <span class="font-light text-white">
+          {{ address | truncate(8, 4, 4) }}
         </span>
-      </button>
+      </a>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapMutations } from "vuex";
+import { EXPLORER_URL } from "@/env";
 
 export default {
   name: "organism-top-bar",
@@ -53,6 +46,17 @@ export default {
       type: Array,
     },
   },
+  computed: {
+    address() {
+      const user = this.list.find((item) => item.id == this.user.id);
+      return user ? user.address : "";
+    },
+  },
+  data() {
+    return {
+      EXPLORER_URL,
+    };
+  },
   methods: {
     ...mapMutations({
       resetRoulette: "roulette/RESET_ROULETTE_SPIN",
@@ -60,9 +64,6 @@ export default {
     ...mapActions({
       fetchUserDetail: "user/detail",
     }),
-    handleConnect() {
-      this.$root.$emit("btn-wallet-connect");
-    },
     async handleUserClick(item) {
       this.resetRoulette();
       await this.fetchUserDetail({
@@ -76,7 +77,7 @@ export default {
 <style lang="less">
 .roulette-rolls-container {
   &.active {
-    background: #00ad00!important;
+    background: #00ad00 !important;
   }
 }
 </style>

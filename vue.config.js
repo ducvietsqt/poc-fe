@@ -1,6 +1,6 @@
 // const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const webpack = require("webpack");
+// const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const isProd = process.env.NODE_ENV === "production";
 

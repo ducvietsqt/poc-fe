@@ -19,7 +19,11 @@ module.exports = {
     extend: {
       transitionDelay: {
         '5000': '5000ms',
-       }
+        '3000': '3000ms',
+      },
+      transitionDuration: {
+        '2000': '2000ms',
+      }
     },
   },
   variants: {

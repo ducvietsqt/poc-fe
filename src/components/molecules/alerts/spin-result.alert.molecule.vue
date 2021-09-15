@@ -1,9 +1,9 @@
 <template>
   <div
-    class="alert-message-container alert-spin-result "
+    class="alert-message-container alert-spin-result"
     :class="{
       'alert-message-visible': spined,
-      'delay-5000 ease-in-out': spined
+      'delay-3000 transition ease-out': spined,
     }"
     @click="handleReset"
   >
@@ -11,6 +11,7 @@
       class="results"
       :class="{
         'alert-message-opacity': spined,
+        'duration-2000 delay-1000': spined,
         'roll-green': rouletteNumber == 0,
         'roll-red': RED_NUMBERS.indexOf(rouletteNumber) != -1,
         'roll-black': BLACK_NUMBERS.indexOf(rouletteNumber) != -1,

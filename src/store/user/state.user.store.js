@@ -1,6 +1,7 @@
 export default () => ({
   list: [],
   detail: {
-    id: 1
+    id: 1,
+    address: ""
   }
 });
