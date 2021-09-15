@@ -19,7 +19,7 @@
         <div class="flex">
           <AtomCheckCircleIcon
             v-if="props.item.type == 'success'"
-            class="w-6 h-6 flex-none text-green-500"
+            class="w-6 h-6 flex-none text-green"
           />
           <AtomCloseCircleIcon
             v-if="props.item.type == 'error'"

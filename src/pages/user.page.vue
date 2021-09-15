@@ -2,115 +2,184 @@
   <div class="roulette-table">
     <OrganismTopBar :user="detail" :list="list" />
     <MoleculeRouletteWheel :spin="spin" />
-    <div class="betting-area" style="width: 1084px; height: 407.2px">
-      <div class="top-area">
-        <div
-          class="
-            number
-            number0
-            regular
-            regular0
-            cursor-pointer
-            part
-            hover:bg-white hover:bg-opacity-50
-          "
-          @click="handleBet(0)"
-        >
-          <MoleculeChip v-if="betting.indexOf(0) != -1" />
-        </div>
-        <div
-          class="
-            number
-            number3
-            hover:bg-white hover:bg-opacity-50
-            cursor-pointer
-          "
-          v-for="item in RENDER_NUMBERS"
-          :key="item"
-          @click="handleBet(item)"
-        >
-          <MoleculeChip v-if="betting.indexOf(item) != -1" />
-        </div>
-        <div class="number bet2to1-1 part bg-gray-900 bg-opacity-50"></div>
-        <div class="number bet2to1-2 part bg-gray-900 bg-opacity-50"></div>
-        <div class="number bet2to1-3 part bg-gray-900 bg-opacity-50"></div>
-      </div>
-      <div class="bottom-area">
-        <div
-          class="
-            bottom-column bottom-column1
-            column-1st12
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column2
-            column-2nd12
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column3
-            column-3rd12
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column4
-            column-1to18
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
+    <div class="w-full py-12 px-16">
+      <div class="betting-area w-full" style="height: 407.2px">
+        <div class="top-area border-solid border border-collapse">
+          <div
+            class="
+              number
+              number0
+              regular
+              regular0
+              cursor-pointer
+              bg-green
+              part
+              px-px
+              border-solid border
+            "
+            @click="handleBet(0)"
+          >
+            <div class="w-full h-full bg-green group relative">
+              <div
+                class="
+                  w-full
+                  h-full
+                  flex
+                  justify-center
+                  items-center
+                  group-hover:bg-white group-hover:bg-opacity-50
+                "
+              >
+                <div
+                  class="
+                    w-10/12
+                    h-1/3
+                    border-4
+                    rounded-full
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
+                  <span class="font-black text-6xl text-white">0</span>
+                </div>
+              </div>
 
-        <div
-          class="
-            bottom-column bottom-column5
-            column-even
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column6
-            column-red
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column7
-            column-black
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column8
-            column-odd
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
-        <div
-          class="
-            bottom-column bottom-column9
-            column-19to36
-            part
-            bg-gray-900 bg-opacity-50
-          "
-        ></div>
+              <MoleculeChip v-if="betting.indexOf(0) != -1" />
+            </div>
+          </div>
+          <div
+            class="number number3 cursor-pointer bg-green border-solid border"
+            v-for="item in RENDER_NUMBERS"
+            :key="item"
+            @click="handleBet(item)"
+          >
+            <div class="w-full h-full bg-green group">
+              <div
+                class="
+                  w-full
+                  h-full
+                  bg-green
+                  group-hover:bg-white group-hover:bg-opacity-50
+                  flex
+                  py-1
+                  px-2
+                  lg:py-3
+                  lg:px-1
+                  xl:py-2
+                  xl:px-2
+                  justify-center
+                  items-center
+                "
+              >
+                <div class="w-full h-full">
+                  <div
+                    class="
+                      w-full
+                      h-full
+                      rounded-full
+                      flex
+                      items-center
+                      justify-center
+                    "
+                    :class="
+                      RED_NUMBERS.indexOf(item) != -1
+                        ? 'bg-red-600'
+                        : 'bg-black'
+                    "
+                  >
+                    <span class="font-black text-3xl text-white">{{
+                      item
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <MoleculeChip v-if="betting.indexOf(item) != -1" />
+            </div>
+          </div>
+          <div class="number bet2to1-1 part bg-gray-900 bg-opacity-50"></div>
+          <div class="number bet2to1-2 part bg-gray-900 bg-opacity-50"></div>
+          <div class="number bet2to1-3 part bg-gray-900 bg-opacity-50"></div>
+        </div>
+        <div class="bottom-area">
+          <div
+            class="
+              bottom-column bottom-column1
+              column-1st12
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column2
+              column-2nd12
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column3
+              column-3rd12
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column4
+              column-1to18
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+
+          <div
+            class="
+              bottom-column bottom-column5
+              column-even
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column6
+              column-red
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column7
+              column-black
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column8
+              column-odd
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+          <div
+            class="
+              bottom-column bottom-column9
+              column-19to36
+              part
+              bg-gray-900 bg-opacity-50
+            "
+          ></div>
+        </div>
       </div>
     </div>
+
     <div class="selections-container">
       <div class="betting-chips-container">
         <MoleculeChip
@@ -205,7 +274,7 @@ import MoleculeAlertSpinResult from "@/components/molecules/alerts/spin-result.a
 import OrganismTopBar from "@/components/organisms/top-bar.organism";
 import OrganismBettingsHistory from "@/components/organisms/bettings-history.organism";
 import AtomSpin from "@/components/atoms/icons/spin.icon.atom";
-import { RENDER_NUMBERS } from "@/constants/roulette.constant";
+import { RENDER_NUMBERS, RED_NUMBERS } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations, mapActions } from "vuex";
 import Notify from "@/utils/notify.util";
@@ -223,6 +292,7 @@ export default {
   },
   data() {
     return {
+      RED_NUMBERS,
       RENDER_NUMBERS,
       alerBets: false,
       betting: [],
