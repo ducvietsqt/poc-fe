@@ -262,7 +262,7 @@
       <div class="alert-message">PLEASE PLACE YOUR BETS</div>
     </div>
 
-    <MoleculeAlertSpinResult :spin="spin" :betting="betting" />
+    <MoleculeAlertSpinResult :spin="spin" :betting="detail.betting" />
     <!-- Alert messages end ---------------------------------------------------------------->
   </div>
 </template>
