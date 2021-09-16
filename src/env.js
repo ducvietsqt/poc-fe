@@ -5,5 +5,5 @@ export const APP_VERSION = process.env.VUE_APP_VERSION || version
 export const EXPLORER_URL = "https://igniscan.io"
 export const API_URL = process.env.VUE_APP_BASE_URL || "https://poc-roulette-api.vinaweb.app/api/v1"
 export const LOCALE = process.env.VUE_APP_I18N_LOCALE || "en"
-export const DEFAULT_USER = 1
+export const DEFAULT_USER = process.env.VUE_APP_DEFAULT_USER || 1
 //CONTRACTs
