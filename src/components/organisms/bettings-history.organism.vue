@@ -18,11 +18,39 @@
       <span slot="content" slot-scope="text" class="text-white">{{
         text
       }}</span>
+      <span
+        slot="number"
+        slot-scope="text"
+        class="
+          text-white
+          w-6
+          h-6
+          border border-black
+          font-normal
+          shadow-inner
+          rounded-full
+          flex
+          justify-center
+          items-center
+        "
+        :class="wrapperNumberClass(text)"
+        >{{ text }}</span
+      >
+      <span slot="win" slot-scope="text" class="text-green font-light">{{
+        text
+      }}</span>
+      <span slot="lost" slot-scope="text" class="text-red-500 font-light"
+        >-{{ text }}</span
+      >
+      <span slot="layout" slot-scope="layout" class="text-white">{{
+        layout.toString()
+      }}</span>
     </a-table>
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
+import { RED_NUMBERS } from "@/constants/roulette.constant";
 
 export default {
   name: "organism-betting-area",
@@ -36,6 +64,7 @@ export default {
   },
   data() {
     return {
+      RED_NUMBERS,
       loading: this.userId ? false : true,
       columns: [
         {
@@ -48,7 +77,7 @@ export default {
           title: "Number",
           dataIndex: "number_win",
           key: "number_win",
-          scopedSlots: { customRender: "content" },
+          scopedSlots: { customRender: "number" },
         },
         {
           title: "Bet Unit",
@@ -60,19 +89,19 @@ export default {
           title: "Win",
           key: "bet_win",
           dataIndex: "bet_win",
-          scopedSlots: { customRender: "content" },
+          scopedSlots: { customRender: "win" },
         },
         {
           title: "Lost",
           key: "bet_lost",
           dataIndex: "bet_lost",
-          scopedSlots: { customRender: "content" },
+          scopedSlots: { customRender: "lost" },
         },
         {
           title: "Bet Layout",
           key: "bet_layout",
           dataIndex: "bet_layout",
-          scopedSlots: { customRender: "content" },
+          scopedSlots: { customRender: "layout" },
         },
       ],
       current: Math.ceil(this.history.offset / this.history.limit) + 1,
@@ -82,12 +111,18 @@ export default {
     ...mapMutations({
       updateHistory: "user/UPDATE_USER_HISTORY",
     }),
+    wrapperNumberClass(number) {
+      if (RED_NUMBERS.indexOf(number) != -1) return "bg-red-500";
+      return "bg-black";
+    },
     handlePageChange(pagination) {
       console.log(`handlePageChange:>>pagination:>>`, pagination);
       this.loading = true;
       setTimeout(async () => {
         try {
-          const results = await this.$http.get(`/users/${this.userId}/bettings`);
+          const results = await this.$http.get(
+            `/users/${this.userId}/bettings`
+          );
           this.updateHistory(results.data);
         } catch (error) {
           console.log(`handlePageChange:>>`, error);

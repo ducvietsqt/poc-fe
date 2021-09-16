@@ -268,7 +268,6 @@
 </template>
 
 <script>
-import MixinMetamaskConnect from "@/mixins/metamask-connect.mixin";
 import MoleculeRouletteWheel from "@/components/molecules/roulette-wheel.molecule";
 import MoleculeChip from "@/components/molecules/chip.molecule";
 import MoleculeAlertSpinResult from "@/components/molecules/alerts/spin-result.alert.molecule";
@@ -282,7 +281,6 @@ import Notify from "@/utils/notify.util";
 
 export default {
   name: "App",
-  mixins: [MixinMetamaskConnect],
   components: {
     MoleculeRouletteWheel,
     OrganismTopBar,

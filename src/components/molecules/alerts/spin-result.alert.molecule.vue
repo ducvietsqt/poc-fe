@@ -7,7 +7,6 @@
     }"
     @click="handleHide"
   >
-    {{ spin.loading }}
     <div
       class="results"
       :class="{
