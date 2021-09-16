@@ -48,6 +48,9 @@ export default {
     spin: {
       type: Object,
     },
+    loading: {
+      type: Boolean
+    }
   },
   watch: {
     spin() {

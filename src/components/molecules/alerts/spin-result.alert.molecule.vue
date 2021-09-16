@@ -3,7 +3,7 @@
     class="alert-message-container alert-spin-result"
     :class="{
       'alert-message-visible': spin.loading,
-      'delay-3000 transition ease-out': spin.loading,
+      'delay-5000 transition ease-out': spin.loading,
     }"
     @click="handleHide"
   >
@@ -11,21 +11,14 @@
       class="results"
       :class="{
         'alert-message-opacity': spin.loading,
-        'duration-2000 delay-1000': spin.loading,
+        'duration-2000 delay-3000': spin.loading,
         'roll-green': spin.number == 0,
         'roll-red': RED_NUMBERS.indexOf(spin.number) != -1,
         'roll-black': BLACK_NUMBERS.indexOf(spin.number) != -1,
       }"
     >
-      <div class="odd-even text">
-        {{ spin.number % 2 == 1 ? "ODD" : "EVEN" }}
-      </div>
-      <div class="high-low text">
-        {{ spin.number >= 19 ? "HIGH" : "LOW" }}
-      </div>
       <div class="roll-number text">{{ spin.number }}</div>
-      <div class="win-lose text">{{ win ? "YOU WON" : "NO WIN" }}</div>
-      <!-- <div class="win-amount text">100</div> -->
+      <div class="win-lose text">{{ win ? "WIN" : "LOST" }}</div>
     </div>
   </div>
 </template>
@@ -51,12 +44,14 @@ export default {
   },
   computed: {
     win() {
+      console.log(`this.betting:>>`, this.betting)
       return this.betting.indexOf(this.spin.number) != -1;
     },
   },
   methods: {
     ...mapMutations({
       updateRouletteSpin: "roulette/UPDATE_ROULETTE_SPIN",
+       updateUserDetail: "user/UPDATE_USER_DETAIL",
     }),
     async handleHide() {
       try {
@@ -64,6 +59,9 @@ export default {
           loading: false,
           number: -1,
         });
+         this.updateUserDetail({
+           betting: []
+         })
       } catch (error) {
         console.log(`handleHide:>>`);
       }

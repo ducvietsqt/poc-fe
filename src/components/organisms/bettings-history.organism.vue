@@ -41,12 +41,15 @@
       <span slot="layout" slot-scope="layout" class="text-white">{{
         layout.toString()
       }}</span>
+      <a slot="tx" :href="`https://igniscan.io/tx/${tx}`" target="_blank" slot-scope="tx" class="text-white">
+        {{tx | truncate(18)}}
+      </a>
     </a-table>
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
-import { RED_NUMBERS } from "@/constants/roulette.constant";
+import { RED_NUMBERS, EXPLORER_URL } from "@/constants/roulette.constant";
 
 export default {
   name: "organism-betting-area",
@@ -73,6 +76,7 @@ export default {
   data() {
     return {
       RED_NUMBERS,
+      EXPLORER_URL,
       loading: this.userId ? false : true,
       columns: [
         {
@@ -111,6 +115,12 @@ export default {
           dataIndex: "bet_layout",
           scopedSlots: { customRender: "layout" },
         },
+        {
+          title: "Tx Hash",
+          dataIndex: "bet_tx_hash",
+          key: "bet_tx_hash",
+          scopedSlots: { customRender: "tx" },
+        }
       ],
       pagination: false,
     };

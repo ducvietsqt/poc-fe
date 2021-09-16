@@ -1,7 +1,7 @@
 <template>
   <div class="roulette-table">
     <OrganismTopBar :spin="spin" :user="detail" :list="list" />
-    <MoleculeRouletteWheel :spin="spin" />
+    <MoleculeRouletteWheel :spin="spin" :loading="spinPending" />
     <div class="w-full py-12 px-16">
       <div class="betting-area w-full" style="height: 407.2px">
         <div class="top-area border-solid border border-collapse">
@@ -351,9 +351,6 @@ export default {
             id: spin,
             number: number,
             loading: true,
-          });
-          this.updateUserDetail({
-            betting: [],
           });
           this.updateUserHistory(history);
         } catch (error) {

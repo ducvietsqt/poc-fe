@@ -16,7 +16,9 @@ module.exports = {
     extend: {
       transitionDelay: {
         '5000': '5000ms',
+        '4000': '4000ms',
         '3000': '3000ms',
+        '2000': '2000ms',
       },
       transitionDuration: {
         '2000': '2000ms',
