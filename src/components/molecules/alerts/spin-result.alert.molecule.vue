@@ -5,9 +5,9 @@
       'alert-message-visible': spin.loading,
       'delay-3000 transition ease-out': spin.loading,
     }"
-    @click="handleReset"
+    @click="handleHide"
   >
-  {{spin.loading}}
+    {{ spin.loading }}
     <div
       class="results"
       :class="{
@@ -57,8 +57,18 @@ export default {
   },
   methods: {
     ...mapMutations({
-      handleReset: "roulette/RESET_ROULETTE_SPIN",
+      updateRouletteSpin: "roulette/UPDATE_ROULETTE_SPIN",
     }),
+    async handleHide() {
+      try {
+        this.updateRouletteSpin({
+          loading: false,
+          number: -1,
+        });
+      } catch (error) {
+        console.log(`handleHide:>>`);
+      }
+    },
   },
 };
 </script>

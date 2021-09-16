@@ -1,6 +1,6 @@
 <template>
   <div class="roulette-table">
-    <OrganismTopBar :user="detail" :list="list" />
+    <OrganismTopBar :spin="spin" :user="detail" :list="list" />
     <MoleculeRouletteWheel :spin="spin" />
     <div class="w-full py-12 px-16">
       <div class="betting-area w-full" style="height: 407.2px">
@@ -277,7 +277,7 @@ import OrganismBettingsHistory from "@/components/organisms/bettings-history.org
 import AtomSpin from "@/components/atoms/icons/spin.icon.atom";
 import { RENDER_NUMBERS, RED_NUMBERS } from "@/constants/roulette.constant";
 
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import Notify from "@/utils/notify.util";
 
 export default {
@@ -321,10 +321,6 @@ export default {
       updateUserDetail: "user/UPDATE_USER_DETAIL",
       updateUserHistory: "user/UPDATE_USER_HISTORY",
     }),
-    ...mapActions({
-      spinRoulette: "roulette/spin",
-      fetchUserDetail: "user/detail",
-    }),
     handleReset() {
       this.betting = [];
     },
@@ -332,10 +328,21 @@ export default {
       this.spinPending = true;
       setTimeout(async () => {
         try {
-          await this.spinRoulette();
-          await this.fetchUserDetail({
-            userId: this.$route.params.userId || 1,
+          const { data: number } = await this.$http.post("/spins");
+          const { data: history } = await this.$http.get(
+            `/users/${this.detail.id}/bettings`
+          );
+          const { data: spin } = await this.$http.get("/spins");
+
+          this.updateRouletteSpin({
+            id: spin,
+            number: number,
+            loading: true,
           });
+          this.updateUserDetail({
+            betting: [],
+          });
+          this.updateUserHistory(history);
         } catch (error) {
           Notify.error(this.$notify, error);
         } finally {

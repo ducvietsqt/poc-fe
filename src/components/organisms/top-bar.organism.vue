@@ -65,7 +65,6 @@ export default {
     }),
     async handleUserClick(item) {
       try {
-        this.resetRoulette();
         const result = await this.$http.get(`/users/${item.id}/bettings`);
         const betting = result.data.items.find(
           (item) => item.bet_spin === this.spin.id
