@@ -287,6 +287,7 @@ import { RENDER_NUMBERS, RED_NUMBERS } from "@/constants/roulette.constant";
 
 import { mapState, mapMutations } from "vuex";
 import Notify from "@/utils/notify.util";
+import { PAGE_LIMIT } from "@/env";
 
 export default {
   name: "App",
@@ -337,7 +338,12 @@ export default {
         try {
           const { data: number } = await this.$http.post("/spins");
           const { data: history } = await this.$http.get(
-            `/users/${this.detail.id}/bettings`
+            `/users/${this.detail.id}/bettings`,
+            {
+              params: {
+                limit: PAGE_LIMIT,
+              },
+            }
           );
           const { data: spin } = await this.$http.get("/spins");
 
@@ -376,7 +382,12 @@ export default {
             }
           );
           const result = await this.$http.get(
-            `/users/${this.$route.params.userId}/bettings`
+            `/users/${this.$route.params.userId}/bettings`,
+            {
+              params: {
+                limit: PAGE_LIMIT,
+              },
+            }
           );
           const betting = result.data.items.find(
             (item) => item.bet_spin === this.spin.id
@@ -402,7 +413,11 @@ export default {
       const { data: list } = await this.$http.get("/users");
       const user = list.find((item) => item.id == this.$route.params.userId);
       const { data: spin } = await this.$http.get("/spins");
-      const result = await this.$http.get(`/users/${user.id}/bettings`);
+      const result = await this.$http.get(`/users/${user.id}/bettings`, {
+        params: {
+          limit: PAGE_LIMIT,
+        },
+      });
 
       const betting = result.data.items.find((item) => item.bet_spin === spin);
 

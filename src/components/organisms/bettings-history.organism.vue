@@ -132,7 +132,8 @@ export default {
             `/users/${this.userId}/bettings`,
             {
               params: {
-                offset: pagination.current * this.history.limit,
+                offset: (pagination.current - 1) * this.history.limit,
+                limit: this.history.limit
               },
             }
           );

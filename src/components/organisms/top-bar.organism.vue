@@ -31,7 +31,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
-import { EXPLORER_URL } from "@/env";
+import { EXPLORER_URL, PAGE_LIMIT } from "@/env";
 
 export default {
   name: "organism-top-bar",
@@ -65,7 +65,11 @@ export default {
     }),
     async handleUserClick(item) {
       try {
-        const result = await this.$http.get(`/users/${item.id}/bettings`);
+        const result = await this.$http.get(`/users/${item.id}/bettings`, {
+          params: {
+            limit: PAGE_LIMIT
+          }
+        });
         const betting = result.data.items.find(
           (item) => item.bet_spin === this.spin.id
         );
