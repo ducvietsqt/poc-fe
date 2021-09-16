@@ -11,14 +11,12 @@
 
 <script>
 import AtomNotify from "@/components/atoms/notify.atom";
-import MoleculeModalLogout from "@/components/molecules/modals/logout.modal.molecule";
 import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "App",
   components: {
     AtomNotify,
-    MoleculeModalLogout,
   },
   created() {
     console.log(`created:>>created`)
