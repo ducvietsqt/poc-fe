@@ -9,11 +9,8 @@
       :loading="loading"
       :data-source="history.items"
       @change="handlePageChange"
-      :pagination="{
-        pageSize: history.limit,
-        current: current,
-        total: history.total,
-      }"
+      :pagination="pagination"
+      :rowKey="(record) => record.bet_spin"
     >
       <span slot="content" slot-scope="text" class="text-white">{{
         text
@@ -25,8 +22,7 @@
           text-white
           w-6
           h-6
-          border border-black
-          font-normal
+          border
           shadow-inner
           rounded-full
           flex
@@ -60,6 +56,18 @@ export default {
     },
     userId: {
       type: [Number, String],
+    },
+  },
+  watch: {
+    history() {
+      if (this.history.total <= this.history.limit) {
+        return (this.pagination = false);
+      }
+      this.pagination = {
+        pageSize: this.history.limit,
+        current: Math.ceil(this.history.offset / this.history.limit) + 1,
+        total: this.history.total,
+      };
     },
   },
   data() {
@@ -104,7 +112,7 @@ export default {
           scopedSlots: { customRender: "layout" },
         },
       ],
-      current: Math.ceil(this.history.offset / this.history.limit) + 1,
+      pagination: false,
     };
   },
   methods: {
@@ -112,7 +120,7 @@ export default {
       updateHistory: "user/UPDATE_USER_HISTORY",
     }),
     wrapperNumberClass(number) {
-      if (RED_NUMBERS.indexOf(number) != -1) return "bg-red-500";
+      if (RED_NUMBERS.indexOf(number) != -1) return "bg-red-700";
       return "bg-black";
     },
     handlePageChange(pagination) {
@@ -121,7 +129,12 @@ export default {
       setTimeout(async () => {
         try {
           const results = await this.$http.get(
-            `/users/${this.userId}/bettings`
+            `/users/${this.userId}/bettings`,
+            {
+              params: {
+                offset: pagination.current * this.history.limit,
+              },
+            }
           );
           this.updateHistory(results.data);
         } catch (error) {
@@ -167,9 +180,12 @@ export default {
     @apply border-gold;
     background-color: #202020;
   }
-  .ant-pagination-item-active a {
-    @apply text-gold;
+  .ant-pagination-item {
+    &.ant-pagination-item-active a {
+      @apply text-gold;
+    }
   }
+
   .ant-pagination-disabled a,
   .ant-pagination-disabled:hover a,
   .ant-pagination-disabled:focus a,
@@ -185,6 +201,29 @@ export default {
   .ant-pagination-prev .ant-pagination-item-link,
   .ant-pagination-next .ant-pagination-item-link {
     background-color: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-pagination-prev:focus .ant-pagination-item-link,
+  .ant-pagination-next:focus .ant-pagination-item-link,
+  .ant-pagination-prev:hover .ant-pagination-item-link,
+  .ant-pagination-next:hover .ant-pagination-item-link {
+    @apply border-gold;
+  }
+  .ant-pagination-item:focus,
+  .ant-pagination-item:hover {
+    @apply border-gold;
+  }
+  .ant-pagination-item {
+    background-color: black;
+  }
+  .ant-pagination-item:focus a,
+  .ant-pagination-item:hover a {
+    @apply text-gold;
+  }
+  .ant-pagination-item a {
     color: #fff;
   }
 }

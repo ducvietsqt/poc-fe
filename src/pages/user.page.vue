@@ -188,7 +188,16 @@
         />
       </div>
       <div class="menu-container">
-        <div class="button button-spin group" @click="handleBetSet">
+        <button
+          class="
+            button button-spin
+            group
+            disabled:pointer-events-none
+            disabled:opacity-50
+          "
+          :disabled="betPending || spinPending"
+          @click="handleBetSet"
+        >
           <div
             class="circle"
             id="chip200"
@@ -210,7 +219,7 @@
           </div>
           <div class="circle-overlay"></div>
           <div class="button-text">BET</div>
-        </div>
+        </button>
         <button
           class="
             button button-spin

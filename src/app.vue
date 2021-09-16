@@ -5,7 +5,6 @@
     </div>
 
     <AtomNotify />
-    <MoleculeModalLogout :address="account" />
   </div>
 </template>
 
