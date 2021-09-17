@@ -2,28 +2,28 @@
   <div
     class="roulette-wheel-container"
     :class="{
-      'z-index-visible': spin.loading,
-      'roulette-wheel-visible': spin.loading,
+      'z-index-visible': spin.loading || loading,
+      'roulette-wheel-visible': spin.loading || loading,
     }"
   >
     <div class="roulette-wheel">
       <div
         class="roulette-wheel-main roulette-image"
         :class="{
-          'roulette-wheel-spin': spin.loading,
+          'roulette-wheel-spin': spin.loading || loading,
         }"
       ></div>
       <div class="roulette-center roulette-image"></div>
       <div
         class="roulette-cross-shadow roulette-image"
         :class="{
-          'roulette-wheel-spin': spin.loading,
+          'roulette-wheel-spin': spin.loading || loading,
         }"
       ></div>
       <div
         class="roulette-cross roulette-image"
         :class="{
-          'roulette-wheel-spin': spin.loading,
+          'roulette-wheel-spin': spin.loading || loading,
         }"
       >
         <div class="number-glow-container"></div>
