@@ -12,6 +12,14 @@
       :pagination="pagination"
       :rowKey="(record) => record.bet_spin"
     >
+      <a
+        slot="spin"
+        @click="handleSpinClick(text)"
+        slot-scope="text"
+        class="text-white hover:text-gold"
+      >
+        {{ text }}</a
+      >
       <span slot="content" slot-scope="text" class="text-white">{{
         text
       }}</span>
@@ -39,17 +47,24 @@
         >-{{ text }}</span
       >
       <span slot="layout" slot-scope="layout" class="text-white">{{
-        layout.toString()
+        layout.join(", ")
       }}</span>
-      <a slot="tx" :href="`https://igniscan.io/tx/${tx}`" target="_blank" slot-scope="tx" class="text-white">
-        {{tx | truncate(18)}}
+      <a
+        slot="tx"
+        :href="`${EXPLORER_URL}/tx/${tx}`"
+        target="_blank"
+        slot-scope="tx"
+        class="text-white hover:text-gold"
+      >
+        {{ tx | truncate(18) }}
       </a>
     </a-table>
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
-import { RED_NUMBERS, EXPLORER_URL } from "@/constants/roulette.constant";
+import { RED_NUMBERS } from "@/constants/roulette.constant";
+import { EXPLORER_URL } from "@/env";
 
 export default {
   name: "organism-betting-area",
@@ -83,7 +98,7 @@ export default {
           title: "Spin",
           dataIndex: "bet_spin",
           key: "bet_spin",
-          scopedSlots: { customRender: "content" },
+          scopedSlots: { customRender: "spin" },
         },
         {
           title: "Number",
@@ -120,7 +135,7 @@ export default {
           dataIndex: "bet_tx_hash",
           key: "bet_tx_hash",
           scopedSlots: { customRender: "tx" },
-        }
+        },
       ],
       pagination: false,
     };
@@ -129,12 +144,20 @@ export default {
     ...mapMutations({
       updateHistory: "user/UPDATE_USER_HISTORY",
     }),
+    async handleSpinClick(spin) {
+      try {
+        const { data } = await this.$http.get(`/spins/${spin}`);
+        window.open(`${EXPLORER_URL}/tx/${data.end_tx_hash}`);
+      } catch (error) {
+        console.log(`error:>>`, error);
+      }
+    },
     wrapperNumberClass(number) {
+      if (number == 0) return "bg-green";
       if (RED_NUMBERS.indexOf(number) != -1) return "bg-red-700";
       return "bg-black";
     },
     handlePageChange(pagination) {
-      console.log(`handlePageChange:>>pagination:>>`, pagination);
       this.loading = true;
       setTimeout(async () => {
         try {
@@ -143,7 +166,7 @@ export default {
             {
               params: {
                 offset: (pagination.current - 1) * this.history.limit,
-                limit: this.history.limit
+                limit: this.history.limit,
               },
             }
           );
